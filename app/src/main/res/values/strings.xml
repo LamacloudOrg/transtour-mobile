@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">transtourChofer</string>
+    <string name="end_point">http://172.28.0.1:8088/</string>
 </resources>

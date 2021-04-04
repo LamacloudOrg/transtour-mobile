@@ -1,4 +1,4 @@
-package com.transtour.chofer.activitys
+package com.transtour.chofer.ui.activitys
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

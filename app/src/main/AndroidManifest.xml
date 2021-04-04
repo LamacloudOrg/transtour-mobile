@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.transtour.chofer">
-
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TranstourChofer">
-        <activity android:name=".activitys.SignVoucherActivity"></activity>
-        <activity android:name=".activitys.TravelActivity" />
-        <activity android:name=".activitys.LoginActivity">
+        <activity android:name="com.transtour.chofer.ui.activitys.SignVoucherActivity" />
+        <activity android:name="com.transtour.chofer.ui.activitys.TravelActivity" />
+        <activity android:name="com.transtour.chofer.ui.activitys.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
