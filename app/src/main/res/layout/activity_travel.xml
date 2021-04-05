@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/imageViewChofer"
-        android:layout_width="293dp"
-        android:layout_height="415dp"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -17,12 +17,24 @@
 
     <TextView
         android:id="@+id/textViewChofer"
-        android:layout_width="284dp"
-        android:layout_height="122dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
         android:layout_marginTop="36dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="@+id/imageViewChofer"
         app:layout_constraintTop_toBottomOf="@+id/imageViewChofer" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="48dp"
+        android:onClick="signDocument"
+        android:text="sign"
+        app:layout_constraintStart_toStartOf="@+id/textViewChofer"
+        app:layout_constraintTop_toBottomOf="@+id/textViewChofer" />
 </androidx.constraintlayout.widget.ConstraintLayout>
