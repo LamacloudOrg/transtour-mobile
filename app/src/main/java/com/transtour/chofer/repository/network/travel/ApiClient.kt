@@ -7,6 +7,6 @@ import retrofit2.http.*
 
 interface ApiClient {
     @Headers("Accept: application/json")
-    @GET("v1/travel?")
+    @GET("v1/travel")
     suspend fun lastTravel(@Query("last") last:Boolean): Response<Travel>
 }

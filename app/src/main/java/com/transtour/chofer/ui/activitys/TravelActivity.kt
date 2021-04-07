@@ -5,19 +5,24 @@ import android.app.job.JobInfo
 import android.app.job.JobScheduler
 import android.content.ComponentName
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.DocumentsContract
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.transtour.chofer.R
 import com.transtour.chofer.model.Travel
 import com.transtour.chofer.service.TravelInfoService
 import com.transtour.chofer.viewmodel.TravelViewModel
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.util.*
 
 
@@ -30,6 +35,8 @@ class TravelActivity : AppCompatActivity() {
     lateinit var tvPasajeroDocumento: TextView
     lateinit var tvPasajeroTelefono :TextView
     lateinit var tvPasajeroNombre:TextView
+
+    lateinit var  btnRefreshTravel:Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,15 +60,30 @@ class TravelActivity : AppCompatActivity() {
         tvPasajeroDocumento = findViewById(R.id.tvPasajeroDocumento)
         tvPasajeroTelefono = findViewById(R.id.tvPasajeroTelefono)
         tvPasajeroNombre = findViewById(R.id.tvPasajeroNombre)
+        btnRefreshTravel = findViewById(R.id.btnRefreshTravel)
 
 
         val  observer = Observer<Travel>(){
             travel -> display(travel)
         }
         travelViewModel!!.resultado.observe(this,observer)
+
+        btnRefreshTravel.setOnClickListener{
+            it -> GlobalScope.launch {
+                getTravel()
+            }
         }
 
-    fun display(travel:Travel){
+
+    }
+
+
+    suspend fun getTravel() {
+        travelViewModel.getTravel()
+    }
+
+
+     fun display(travel:Travel){
         tvViajeHora.text = travel.hour
         tvViajeFecha.text = travel.date
         tvPasajeroDocumento.text = travel.passanger?.document
@@ -89,29 +111,35 @@ class TravelActivity : AppCompatActivity() {
         }
     }
 
-    @SuppressLint("NewApi")
-    fun scheduleJob(v: View?) {
-        val componentName = ComponentName(this, TravelInfoService::class.java)
-        val info = JobInfo.Builder(123, componentName)
+
+   /* fun scheduleJob(v: View?) {
+     val componentName =  ComponentName(applicationContext, TravelInfoService::class.java)
+        val info =
+            JobInfo.Builder(123, componentName)
                 .setRequiresCharging(true)
                 .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
                 .setPersisted(true)
-                .setPeriodic((15 * 60 * 1000).toLong())
+                    .setPeriodic(5000)
                 .build()
+
         val scheduler = getSystemService(JOB_SCHEDULER_SERVICE) as JobScheduler
         val resultCode = scheduler.schedule(info)
         if (resultCode == JobScheduler.RESULT_SUCCESS) {
-            Log.d(TAG, "Job scheduled")
+            Log.i(TAG, "Job scheduled")
         } else {
-            Log.d(TAG, "Job scheduling failed")
+            Log.i(TAG, "Job scheduling failed")
         }
     }
 
-    @SuppressLint("NewApi")
+
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     fun cancelJob(v: View?) {
-        val scheduler = getSystemService(JOB_SCHEDULER_SERVICE) as JobScheduler
+      val scheduler = getSystemService(JOB_SCHEDULER_SERVICE) as JobScheduler
         scheduler.cancel(123)
-        Log.d(TAG, "Job cancelled")
+        Log.i(TAG, "Job cancelled")
+
     }
+
+    */
 
 }

@@ -48,15 +48,14 @@
                 android:id="@+id/btnRefreshTravel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="cancelJob"
-                android:text="stop" />
+                android:text="refresh" />
 
-            <Button
-                android:id="@+id/btnStopRefreshTravel"
+            <ImageButton
+                android:id="@+id/btnCallUser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="scheduleJob"
-                android:text="refresh" />
+                android:src="@android:drawable/ic_media_play"
+                android:text="call" />
         </LinearLayout>
 
         <LinearLayout
