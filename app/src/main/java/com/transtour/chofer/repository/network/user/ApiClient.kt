@@ -1,4 +1,4 @@
-package com.transtour.chofer.repository.network
+package com.transtour.chofer.repository.network.user
 
 import com.google.gson.JsonObject
 import com.transtour.chofer.model.User

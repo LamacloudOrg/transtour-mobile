@@ -6,35 +6,124 @@
     android:layout_height="match_parent"
     tools:context=".ui.activitys.TravelActivity">
 
-    <ImageView
-        android:id="@+id/imageViewChofer"
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
+    <LinearLayout
+        android:id="@+id/llButons"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/llTravel"
+        tools:layout_editor_absoluteX="16dp">
+
+        <Button
+            android:id="@+id/btnFinish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="start" />
+
+        <Button
+            android:id="@+id/btnStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="signDocument"
+            android:text="finish" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llTravel"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/llChofer"
+        tools:layout_editor_absoluteX="117dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnRefreshTravel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="cancelJob"
+                android:text="stop" />
+
+            <Button
+                android:id="@+id/btnStopRefreshTravel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="scheduleJob"
+                android:text="refresh" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvViajeHora"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="12:30" />
+
+            <TextView
+                android:id="@+id/tvPasajeroDocumento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="43.213.213" />
+
+            <TextView
+                android:id="@+id/tvPasajeroTelefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="11892021" />
+
+            <TextView
+                android:id="@+id/tvViajeFecha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="12/04/2020" />
+
+            <TextView
+                android:id="@+id/tvPasajeroNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Juan Manuel" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llChofer"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/textViewChofer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="36dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/imageViewChofer"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewChofer" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="155dp"
+            android:layout_height="120dp"
+            android:layout_weight="1"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="48dp"
-        android:onClick="signDocument"
-        android:text="sign"
-        app:layout_constraintStart_toStartOf="@+id/textViewChofer"
-        app:layout_constraintTop_toBottomOf="@+id/textViewChofer" />
+        <TextView
+            android:id="@+id/tvChoferNombre"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="TextView" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

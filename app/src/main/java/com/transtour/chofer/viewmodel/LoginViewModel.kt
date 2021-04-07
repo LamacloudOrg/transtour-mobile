@@ -4,9 +4,8 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.transtour.chofer.model.User
-import com.transtour.chofer.repository.network.ApiClientAdapter
+import com.transtour.chofer.repository.network.user.ApiClientAdapter
 import kotlinx.coroutines.*
-import javax.inject.Inject
 
 class LoginViewModel :ViewModel()  {
 

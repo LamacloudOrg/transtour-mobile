@@ -1,9 +1,8 @@
-package com.transtour.chofer.repository.network
+package com.transtour.chofer.repository.network.user
 
 
-import android.content.res.Resources
 import com.google.gson.GsonBuilder
-import com.transtour.chofer.R
+import com.transtour.chofer.repository.network.CustomInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
