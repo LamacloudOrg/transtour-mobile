@@ -12,7 +12,7 @@ object TravelNetworkAdapter {
 
         //val endPoint:String =  Resources.getSystem().getString(R.string.end_point)
 
-        val endPoint:String ="http://172.28.0.1:8088/"
+        val endPoint:String ="http://172.26.0.1:8088/"
 
 
         val httpClient = OkHttpClient.Builder()

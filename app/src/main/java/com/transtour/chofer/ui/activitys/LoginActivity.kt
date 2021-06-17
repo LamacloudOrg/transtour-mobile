@@ -67,7 +67,7 @@ class LoginActivity() : AppCompatActivity() {
      suspend fun isUser() {
         user.name = editTextName?.text.toString()
         user.password = editTextPassword?.text.toString()
-         loginViewModel?.authenticate(user)
+         loginViewModel?.authenticate(user,getApplicationContext())
      }
 
 
