@@ -1,24 +1,20 @@
 package com.transtour.chofer.ui.activitys
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Parcel
-import android.os.Parcelable
-import android.view.View
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.messaging.FirebaseMessaging
 import com.transtour.chofer.App
 import com.transtour.chofer.R
 import com.transtour.chofer.model.User
 import com.transtour.chofer.viewmodel.LoginViewModel
-import dagger.Component
 import kotlinx.coroutines.*
 import javax.inject.Inject
-import kotlin.coroutines.CoroutineContext
 
 class LoginActivity() : AppCompatActivity() {
     var user:User = User()
@@ -34,6 +30,7 @@ class LoginActivity() : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         (application as App).getComponent().inject(this)
         configView()
+
     }
 
      fun  configView(){
@@ -45,7 +42,7 @@ class LoginActivity() : AppCompatActivity() {
                 if (isOK){
                     Toast.makeText(this,"Usuario ok",Toast.LENGTH_LONG).show()
                     val intent = Intent(this@LoginActivity,TravelActivity::class.java).apply {
-                        putExtra("userName", user.name)
+                        putExtra("userName", user.userName)
                     }
                     startActivity(intent)
                 }else{
@@ -65,7 +62,7 @@ class LoginActivity() : AppCompatActivity() {
      }
 
      suspend fun isUser() {
-        user.name = editTextName?.text.toString()
+        user.userName = editTextName?.text.toString()
         user.password = editTextPassword?.text.toString()
          loginViewModel?.authenticate(user,getApplicationContext())
      }

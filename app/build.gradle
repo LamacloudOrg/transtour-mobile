@@ -58,7 +58,7 @@ android {
 
         // Declare the dependencies for the Firebase Cloud Messaging and Analytics libraries
         // When using the BoM, you don't specify versions in Firebase library dependencies
-        implementation 'com.google.firebase:firebase-messaging-ktx:21.0.0'
+        implementation 'com.google.firebase:firebase-messaging-ktx:20.0.0'
         implementation 'com.google.firebase:firebase-analytics-ktx'
 
         implementation 'com.android.support:multidex:1.0.3'

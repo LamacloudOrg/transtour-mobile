@@ -2,36 +2,54 @@ package com.transtour.chofer.repository.network
 
 import android.content.Context
 import com.transtour.chofer.R
-import java.io.FileInputStream
 import java.security.KeyStore
 import java.security.SecureRandom
+import java.security.cert.Certificate
+import java.security.cert.CertificateFactory
 import javax.net.ssl.KeyManagerFactory
 import javax.net.ssl.SSLContext
 import javax.net.ssl.SSLSocketFactory
+import javax.net.ssl.TrustManagerFactory
+
 
 object Ssl {
 
-    fun generateCetificate(context: Context): SSLSocketFactory? {
-        // Get the file of our certificate
-        var caFileInputStream = context.resources.openRawResource(R.raw.my_certificate)
+    fun generateCetificate(context: Context): SSLContext? {
 
-     //   var caFileInputStream =  FileInputStream("/src/main/resources/my_certificate")
 
-        // We're going to put our certificates in a Keystore
-        var keyStore:KeyStore =KeyStore.getInstance("PKCS12");
-        keyStore.load(caFileInputStream, "transtour-api".toCharArray())
+        // Loading CAs from an InputStream
+        // Loading CAs from an InputStream
+        var cf: CertificateFactory? = null
+        cf = CertificateFactory.getInstance("X.509")
 
-        // Create a KeyManagerFactory with our specific algorithm our our public keys
-        // Most of the cases is gonna be "X509"
+        var ca: Certificate
+        // I'm using Java7. If you used Java6 close it manually with finally.
+        context.resources.openRawResource(R.raw.my_certificate).use { cert ->
+            ca = cf.generateCertificate(cert)
+        }
 
-        val keyManagerFactory = KeyManagerFactory.getInstance("X509");
-        keyManagerFactory.init(keyStore, "transtour-api".toCharArray());
+        // Creating a KeyStore containing our trusted CAs
 
-        // Create a SSL context with the key managers of the KeyManagerFactory
+        // Creating a KeyStore containing our trusted CAs
+        val keyStoreType = KeyStore.getDefaultType()
+        val keyStore = KeyStore.getInstance(keyStoreType)
+        keyStore.load(null, null)
+        keyStore.setCertificateEntry("ca", ca)
+
+        // Creating a TrustManager that trusts the CAs in our KeyStore.
+
+        // Creating a TrustManager that trusts the CAs in our KeyStore.
+        val tmfAlgorithm: String = TrustManagerFactory.getDefaultAlgorithm()
+        val tmf: TrustManagerFactory = TrustManagerFactory.getInstance(tmfAlgorithm)
+        tmf.init(keyStore)
+
+        // Creating an SSLSocketFactory that uses our TrustManager
+
+        // Creating an SSLSocketFactory that uses our TrustManager
         val sslContext = SSLContext.getInstance("TLS")
-        sslContext.init(keyManagerFactory.keyManagers, null, SecureRandom())
+        sslContext.init(null, tmf.getTrustManagers(), null)
 
-        return sslContext.socketFactory
+        return sslContext
 
     }
 }

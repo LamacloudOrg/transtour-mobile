@@ -20,10 +20,14 @@ class LoginViewModel :ViewModel()  {
                 if (response.isSuccessful) {
                     resultado.postValue(true)
                 } else {
-                    resultado.postValue(true)
+                    resultado.postValue(false)
                 }
+
+                Log.i("response", response.message());
+
+
             } catch (e: Exception) {
-                resultado.postValue(true)
+                resultado.postValue(false)
                 Log.i("Exception login", e.localizedMessage)
             }
         }

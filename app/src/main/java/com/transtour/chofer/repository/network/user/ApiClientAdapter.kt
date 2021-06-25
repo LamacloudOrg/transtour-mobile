@@ -8,22 +8,23 @@ import com.transtour.chofer.repository.network.Ssl
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.net.ssl.HostnameVerifier
 
 object ApiClientAdapter{
-
-    //val endPoint:String =  Resources.getSystem().getString(R.string.end_point)
-
-
 
 
     fun generateService(context: Context): ApiClient {
         val endPoint:String ="https://209.126.85.7:8080/"
+        //val endPoint:String ="https://localhost:8080/"
 
+        val allHostsValid = HostnameVerifier { _, _ -> true }
 
         val httpClient = OkHttpClient.Builder()
             .apply {
                 addNetworkInterceptor(CustomInterceptor())
-                sslSocketFactory(Ssl.generateCetificate(context))
+                sslSocketFactory(Ssl.generateCetificate(context)?.socketFactory)
+                hostnameVerifier(allHostsValid)
+
             }.build()
 
         var gson = GsonBuilder()

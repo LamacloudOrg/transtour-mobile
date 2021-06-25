@@ -9,6 +9,6 @@ import retrofit2.http.POST
 
 interface ApiClient {
     @Headers("Accept: application/json")
-    @POST("v1/user/login")
+    @POST("api/v1/user/oauth/token")
     suspend fun login(@Body user: User ): Response<String>
 }
