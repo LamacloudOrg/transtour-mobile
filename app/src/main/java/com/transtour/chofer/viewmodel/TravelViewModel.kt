@@ -1,38 +1,42 @@
 package com.transtour.chofer.viewmodel
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.gson.Gson
+import com.google.gson.JsonObject
+import com.google.gson.JsonParser
 import com.transtour.chofer.model.Travel
-import com.transtour.chofer.repository.network.travel.TravelNetworkAdapter
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import java.lang.Exception
+
 
 class TravelViewModel: ViewModel()  {
     val resultado = MutableLiveData<Travel>()
     val TAG:String = "TravelViewModel"
 
 
-    suspend fun  getTravel(){
-        withContext(Dispatchers.IO) {
-            try {
+    suspend fun  getTravel(context: Context){
 
-                val response = TravelNetworkAdapter.apiClient.lastTravel(true)
-                if (response.isSuccessful){
-                    resultado.postValue(response.body())
-                    Log.i(TAG,"last travel ${response.body().toString()} ")
-                }else{
-                    Log.d(TAG,"no se pudo recuperar el viaje  ${response.errorBody().toString()} ")
-                }
-                Log.i(TAG, "Job finished");
+        val sharedPref = context?.getSharedPreferences(
+            "transtour.mobile", Context.MODE_PRIVATE)
+         val travel = sharedPref?.getString("travel-new",null)
 
-            }catch (e: Exception){
-                e.stackTrace
-                Log.i(TAG,"error  ${e.localizedMessage} ")
-            }
-        }
+        //TODO ver SQLLite Local
 
-    }
+        Log.d("TravelViewModel","obteniendo travel")
+
+         travel.let {
+             it?.let { it1 -> Log.d("TravelViewModel", it1)
+                // val jsonObject: JsonObject = JsonParser().parse(it1).getAsJsonObject()
+                 val  gson = Gson()
+                 val travel = gson.fromJson(it1, Travel::class.java)
+                 Log.d("travel-desrializado",travel.toString())
+                 resultado.postValue(travel)
+             }
+
+         }
+
+     }
+
 
 }

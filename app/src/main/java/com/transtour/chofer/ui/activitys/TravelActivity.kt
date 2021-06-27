@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.job.JobInfo
 import android.app.job.JobScheduler
 import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -36,6 +37,9 @@ class TravelActivity : AppCompatActivity() {
     lateinit var tvPasajeroTelefono :TextView
     lateinit var tvPasajeroNombre:TextView
 
+    var passanger: String? = null
+    var date: String? = null
+
     lateinit var  btnRefreshTravel:Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +48,17 @@ class TravelActivity : AppCompatActivity() {
 
         val intent:Intent = intent
         val user: String? = intent.getStringExtra("userName");
+
+        passanger = intent.getStringExtra("passanger")
+        date = intent.getStringExtra("date")
+
+        val sharedPref = applicationContext?.getSharedPreferences(
+            "transtour.mobile", Context.MODE_PRIVATE)
+
+        val token = sharedPref?.getString("token-user","")
+
+        token?.let { Log.d("token-user", it) }
+
 
         val textViewChofer:TextView = findViewById(R.id.tvChoferNombre)
         textViewChofer.text = user
@@ -63,6 +78,7 @@ class TravelActivity : AppCompatActivity() {
         btnRefreshTravel = findViewById(R.id.btnRefreshTravel)
 
 
+
         val  observer = Observer<Travel>(){
             travel -> display(travel)
         }
@@ -79,16 +95,14 @@ class TravelActivity : AppCompatActivity() {
 
 
     suspend fun getTravel() {
-        travelViewModel.getTravel()
+        travelViewModel.getTravel(applicationContext)
     }
 
 
      fun display(travel:Travel){
         tvViajeHora.text = travel.hour
         tvViajeFecha.text = travel.date
-        tvPasajeroDocumento.text = travel.passanger?.document
-        tvPasajeroTelefono.text = travel.passanger?.document
-        tvPasajeroNombre.text = travel.passanger?.document
+        tvPasajeroNombre.text = travel.passenger
 
     }
 

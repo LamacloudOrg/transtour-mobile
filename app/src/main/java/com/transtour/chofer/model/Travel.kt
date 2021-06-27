@@ -5,19 +5,23 @@ import java.util.*
 
  class Travel{
 
-     @SerializedName("travel_id")
+     //@SerializedName("travel_id")
      var id:String? = null
-     @SerializedName("fecha")
+     //@SerializedName("fecha")
      var date:String? = null
-     @SerializedName("hora")
+     //@SerializedName("hora")
      var hour:String? = null
-     @SerializedName("pasajero")
-     var passanger:Passanger? = null
-     @SerializedName("chofer")
-     var chofer:Chofer? = null
+     //@SerializedName("pasajero")
+     var passenger:String? = null
+     //@SerializedName("chofer")
+     var taxiDriver:String? = null
+     //@SerializedName("origin")
+     var origin:String? = null
+     //@SerializedName("destiny")
+     var destiny:String? = null
 
 
      override fun toString(): String {
-         return "fecha:${date} hour:${hour}  passanger :${passanger}  chofer:${chofer}"
+         return "fecha:${date} hora:${hour}  pasajero :${passenger}  chofer:${taxiDriver}"
      }
  }

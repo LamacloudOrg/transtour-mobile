@@ -19,16 +19,22 @@ class LoginViewModel :ViewModel()  {
                 val response = ApiClientAdapter.generateService(context).login(user)
                 if (response.isSuccessful) {
                     resultado.postValue(true)
+                    //TODO save in
+                    val sharedPref = context?.getSharedPreferences(
+                        "transtour.mobile", Context.MODE_PRIVATE)
+                    with (sharedPref.edit()) {
+                        putString("token", response.body())
+                        apply()
+                    }
+
                 } else {
+                    Log.d("response", response.errorBody().toString());
                     resultado.postValue(false)
                 }
 
-                Log.i("response", response.message());
-
-
             } catch (e: Exception) {
-                resultado.postValue(false)
-                Log.i("Exception login", e.localizedMessage)
+                //resultado.postValue(false)
+                Log.d("Exception login", e.localizedMessage)
             }
         }
 
