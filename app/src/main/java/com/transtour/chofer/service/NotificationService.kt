@@ -1,7 +1,6 @@
 package com.transtour.chofer.service
 
 import android.R
-import android.app.Notification
 import android.app.NotificationManager
 import android.content.Context
 import android.graphics.BitmapFactory
@@ -13,7 +12,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import com.google.gson.Gson
+import com.transtour.chofer.repository.network.notification.ApiClientAdapter
 import java.time.LocalDate
 
 
@@ -36,7 +35,7 @@ class NotificationService: FirebaseMessagingService() {
             val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
 
-            val notification = Notification.Builder(applicationContext)
+            val notification = android.app.Notification.Builder(applicationContext)
                 .setContentTitle(it.title)
                 .setContentText("New travel "+ LocalDate.now().toString())
                 .setSmallIcon(R.drawable.ic_dialog_alert)
@@ -68,14 +67,19 @@ class NotificationService: FirebaseMessagingService() {
 
     override fun onNewToken(fmcToken: String) {
         super.onNewToken(fmcToken);
-        Log.i("token-firebase", fmcToken)
-        //TODO implementar esta funcion
+        Log.i("NEW FCM TOKEN", fmcToken)
         sendToken(fmcToken)
     }
 
-    private fun sendToken(token:String){
-        //TODO registrar token en el servidor
-        //TUAdapater.generateService(applicationContext).registrarToken(token)
+      fun sendToken(token:String){
+        try {
+            val userId = 1L
+            val notification = com.transtour.chofer.model.Notification(userId, token)
+            val response = ApiClientAdapter.generateService(baseContext).registerToken(notification)
+
+        } catch (e: Exception) {
+        Log.d("Exception notification", e.localizedMessage)
+        }
     }
 
 

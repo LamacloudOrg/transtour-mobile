@@ -1,5 +1,6 @@
 package com.transtour.chofer.ui.activitys
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.transtour.chofer.App
 import com.transtour.chofer.R
 import com.transtour.chofer.model.User
+import com.transtour.chofer.service.NotificationService
 import com.transtour.chofer.viewmodel.LoginViewModel
 import kotlinx.coroutines.*
 import javax.inject.Inject
@@ -30,7 +32,7 @@ class LoginActivity() : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         (application as App).getComponent().inject(this)
         configView()
-
+        getAndSetTokenMobileInContext()
     }
 
      fun  configView(){
@@ -50,6 +52,7 @@ class LoginActivity() : AppCompatActivity() {
 
                 }
         }
+
          loginViewModel!!.resultado.observe(this,observer)
          btnLogin =findViewById(R.id.btnLogin)
 
@@ -67,7 +70,15 @@ class LoginActivity() : AppCompatActivity() {
          loginViewModel?.authenticate(user,getApplicationContext())
      }
 
-
-
+    fun getAndSetTokenMobileInContext (){
+            FirebaseMessaging.getInstance().token.addOnCompleteListener {
+            if(it.isComplete){
+                var fcmToken = it.result.toString()
+                Log.i("fcmToken", fcmToken)
+                // DO your thing with your firebase token
+                NotificationService().onNewToken(fcmToken)
+            }
+        }
+    }
 }
 
