@@ -1,4 +1,4 @@
-package com.transtour.chofer.repository.network.user
+package com.transtour.chofer.repository.network.userNotification
 
 
 import android.content.Context
@@ -14,7 +14,7 @@ object ApiClientAdapter{
 
 
     fun generateService(context: Context): ApiClient {
-       // val endPoint:String ="https://209.126.85.7:8080/"
+      //  val endPoint:String ="https://209.126.85.7:8080/"
         val endPoint:String ="https://localhost:8080/"
 
         val allHostsValid = HostnameVerifier { _, _ -> true }
