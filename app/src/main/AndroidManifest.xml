@@ -14,7 +14,7 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TranstourChofer">
+        android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity android:name="com.transtour.chofer.ui.activitys.SignVoucherActivity" />
         <activity android:name="com.transtour.chofer.ui.activitys.TravelActivity" />
         <activity android:name="com.transtour.chofer.ui.activitys.LoginActivity">
@@ -24,6 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.transtour.chofer.ui.activitys.RegisterActivity" />
 
         <service
             android:name=".service.TravelInfoService"

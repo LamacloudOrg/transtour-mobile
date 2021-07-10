@@ -12,7 +12,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import com.transtour.chofer.repository.network.userNotification.ApiClientAdapter
+import com.transtour.chofer.repository.network.userNotification.UserNotificationNetworkAdapter
 import java.time.LocalDate
 
 
@@ -75,7 +75,7 @@ class NotificationService: FirebaseMessagingService() {
         try {
             val userId = 1L
             val userNotification = com.transtour.chofer.model.UserNotification(userId, token)
-            val response = ApiClientAdapter.generateService(baseContext).registerToken(userNotification)
+            val response = UserNotificationNetworkAdapter.generateService(baseContext).registerToken(userNotification)
 
         } catch (e: Exception) {
         Log.d("Exception notification", e.localizedMessage)

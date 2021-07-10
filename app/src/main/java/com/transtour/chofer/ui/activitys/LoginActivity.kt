@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -32,7 +33,6 @@ class LoginActivity() : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         (application as App).getComponent().inject(this)
         configView()
-        getAndSetTokenMobileInContext()
     }
 
      fun  configView(){
@@ -70,15 +70,10 @@ class LoginActivity() : AppCompatActivity() {
          loginViewModel?.authenticate(user,getApplicationContext())
      }
 
-    fun getAndSetTokenMobileInContext (){
-            FirebaseMessaging.getInstance().token.addOnCompleteListener {
-            if(it.isComplete){
-                var fcmToken = it.result.toString()
-                Log.i("fcmToken", fcmToken)
-                // DO your thing with your firebase token
-                NotificationService().onNewToken(fcmToken)
-            }
-        }
+    fun registerAction(v: View) {
+        val intent = Intent(this@LoginActivity,RegisterActivity::class.java)
+            startActivity(intent)
     }
+
 }
 

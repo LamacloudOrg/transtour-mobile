@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.transtour.chofer.model.User
-import com.transtour.chofer.repository.network.user.ApiClientAdapter
+import com.transtour.chofer.repository.network.user.UserNetworkAdapter
 import kotlinx.coroutines.*
 
 class LoginViewModel :ViewModel()  {
@@ -16,7 +16,7 @@ class LoginViewModel :ViewModel()  {
         withContext(Dispatchers.IO) {
             try {
 
-                val response = ApiClientAdapter.generateService(context).login(user)
+                val response = UserNetworkAdapter.generateService(context).login(user)
                 if (response.isSuccessful) {
                     resultado.postValue(true)
                     //TODO save in

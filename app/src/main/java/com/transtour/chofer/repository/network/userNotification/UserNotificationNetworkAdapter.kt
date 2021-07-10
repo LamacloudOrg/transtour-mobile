@@ -10,7 +10,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.net.ssl.HostnameVerifier
 
-object ApiClientAdapter{
+object UserNotificationNetworkAdapter{
 
 
     fun generateService(context: Context): ApiClient {

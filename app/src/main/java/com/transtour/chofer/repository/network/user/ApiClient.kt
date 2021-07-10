@@ -11,4 +11,9 @@ interface ApiClient {
     @Headers("Accept: application/json")
     @POST("api/v1/user/oauth/token")
     suspend fun login(@Body user: User ): Response<String>
+
+    @Headers("Accept: application/json")
+    @POST("api/v1/user/update/password")
+    suspend fun updateUserPassWord(@Body user: User ): Response<String>
+
 }
