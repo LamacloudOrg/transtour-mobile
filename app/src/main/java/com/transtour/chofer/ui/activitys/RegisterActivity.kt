@@ -17,6 +17,7 @@ import com.transtour.chofer.model.User
 import com.transtour.chofer.model.UserRegisterNotification
 import com.transtour.chofer.service.NotificationService
 import com.transtour.chofer.viewmodel.LoginViewModel
+import com.transtour.chofer.viewmodel.RegisterViewModel
 import javax.inject.Inject
 
 class RegisterActivity() : AppCompatActivity() {
@@ -24,7 +25,7 @@ class RegisterActivity() : AppCompatActivity() {
     var user: User = User()
 
   //  @Inject
-  //  lateinit var loginViewModel: LoginViewModel
+    lateinit var registerViewModel: RegisterViewModel
     private lateinit var editTextNameUser: EditText
     private lateinit var editTextToken: EditText
     private lateinit var editTextPassword: EditText
@@ -36,6 +37,7 @@ class RegisterActivity() : AppCompatActivity() {
       //  (application as App).getComponent().inject(this)
         configView()
         getAndSetTokenMobileInContext(applicationContext)
+        registerViewModel = RegisterViewModel()
     }
 
     fun configView() {
@@ -71,7 +73,7 @@ class RegisterActivity() : AppCompatActivity() {
             if (isOK){
                 Toast.makeText(this,"Usuario ok",Toast.LENGTH_LONG).show()
                 val intent = Intent(this@RegisterActivity,LoginActivity::class.java).apply {
-                    putExtra("userName", user.userName)
+                    putExtra("userName", user.dni)
                 }
                 startActivity(intent)
             }else{
@@ -80,7 +82,7 @@ class RegisterActivity() : AppCompatActivity() {
             }
         }
 
-        loginViewModel!!.resultado.observe(this,observer)
+        registerViewModel!!.resultado.observe(this,observer)
 
 
         //TODO update del cp en notification backend
