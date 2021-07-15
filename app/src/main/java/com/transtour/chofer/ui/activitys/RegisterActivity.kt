@@ -55,7 +55,7 @@ class RegisterActivity() : AppCompatActivity() {
             }
         }
 
-
+        /*
         val observerToken = Observer<String> { token ->
             if (token.isNotEmpty()) {
                 editTextToken.setText(token)
@@ -63,9 +63,10 @@ class RegisterActivity() : AppCompatActivity() {
                 editTextToken.setText("")
             }
         }
+        */
 
         registerViewModel.resultado.observe(this, observerRegistration)
-        registerViewModel.token.observe(this, observerToken)
+    //    registerViewModel.token.observe(this, observerToken)
     }
 
    //@RequiresApi(Build.VERSION_CODES.GINGERBREAD)
@@ -119,6 +120,7 @@ class RegisterActivity() : AppCompatActivity() {
 
     }
 
+    /*
     fun getTokenRegistration(view: View) {
         val userId: String = editTextNameUser.text.toString()
 
@@ -130,7 +132,8 @@ class RegisterActivity() : AppCompatActivity() {
         GlobalScope.launch {
             registerViewModel.tokenRegistration()
         }
-        
 
     }
+    */
+
 }
