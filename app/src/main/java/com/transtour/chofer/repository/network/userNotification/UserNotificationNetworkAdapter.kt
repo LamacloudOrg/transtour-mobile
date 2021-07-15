@@ -4,6 +4,7 @@ package com.transtour.chofer.repository.network.userNotification
 import android.content.Context
 import com.google.gson.GsonBuilder
 import com.transtour.chofer.repository.network.CustomInterceptor
+import com.transtour.chofer.repository.network.EndPointApi
 import com.transtour.chofer.repository.network.Ssl
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -14,8 +15,6 @@ object UserNotificationNetworkAdapter{
 
 
     fun generateService(context: Context): ApiClient {
-      //  val endPoint:String ="https://209.126.85.7:8080/"
-        val endPoint:String ="https://localhost:8080/"
 
         val allHostsValid = HostnameVerifier { _, _ -> true }
 
@@ -32,7 +31,7 @@ object UserNotificationNetworkAdapter{
             .create()
 
         return Retrofit.Builder()
-            .baseUrl(endPoint)
+            .baseUrl(EndPointApi.getEndPoint("prod"))
             .client(httpClient)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
