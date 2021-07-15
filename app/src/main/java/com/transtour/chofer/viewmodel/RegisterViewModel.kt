@@ -13,11 +13,12 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
 
-class RegisterViewModel : ViewModel() {
+class RegisterViewModel() : ViewModel() {
 
     val resultado = MutableLiveData<Boolean>()
+    val token = MutableLiveData<String>()
 
-    suspend fun execute (user: UserRegisterNotification,password: String,context: Context)= coroutineScope {
+    suspend fun registUser (user: UserRegisterNotification,password: String,context: Context)= coroutineScope {
        val res1 =  async {updateUserPassWord(user.dni!!, password,context)}
         val res2 = async { setFcmToken(user,context)}
 
@@ -86,6 +87,10 @@ class RegisterViewModel : ViewModel() {
             }
         }
         return res;
+    }
+
+    suspend fun tokenRegistration() {
+        TODO("Not yet implemented")
     }
 
 }

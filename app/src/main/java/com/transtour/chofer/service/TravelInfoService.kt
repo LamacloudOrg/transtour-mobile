@@ -3,14 +3,10 @@ package com.transtour.chofer.service
 import android.annotation.SuppressLint
 import android.app.job.JobParameters
 import android.app.job.JobService
-import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
 import com.transtour.chofer.repository.network.travel.TravelNetworkAdapter
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 @SuppressLint("NewApi")
 class TravelInfoService: JobService() {

@@ -1,6 +1,5 @@
 package com.transtour.chofer.module
 
-import com.transtour.chofer.viewmodel.LoginViewModel
 import com.transtour.chofer.viewmodel.RegisterViewModel
 import dagger.Module
 import dagger.Provides

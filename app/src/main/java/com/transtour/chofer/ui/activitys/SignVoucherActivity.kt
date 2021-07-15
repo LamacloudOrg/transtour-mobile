@@ -1,7 +1,7 @@
 package com.transtour.chofer.ui.activitys
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.transtour.chofer.R
 
 class SignVoucherActivity : AppCompatActivity() {

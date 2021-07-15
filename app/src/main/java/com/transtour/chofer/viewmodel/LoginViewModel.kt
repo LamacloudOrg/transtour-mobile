@@ -6,9 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.transtour.chofer.model.User
 import com.transtour.chofer.repository.network.user.UserNetworkAdapter
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
-class LoginViewModel :ViewModel()  {
+class LoginViewModel() :ViewModel()  {
 
     val resultado = MutableLiveData<Boolean>()
 

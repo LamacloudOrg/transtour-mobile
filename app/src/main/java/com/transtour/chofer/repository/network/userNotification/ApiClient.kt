@@ -1,6 +1,5 @@
 package com.transtour.chofer.repository.network.userNotification
 
-import com.transtour.chofer.model.UserRegister
 import com.transtour.chofer.model.UserRegisterNotification
 import retrofit2.Response
 import retrofit2.http.Body

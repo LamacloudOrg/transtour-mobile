@@ -5,12 +5,10 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
-import com.google.gson.JsonObject
-import com.google.gson.JsonParser
 import com.transtour.chofer.model.Travel
 
 
-class TravelViewModel: ViewModel()  {
+class TravelViewModel(): ViewModel()  {
     val resultado = MutableLiveData<Travel>()
     val TAG:String = "TravelViewModel"
 

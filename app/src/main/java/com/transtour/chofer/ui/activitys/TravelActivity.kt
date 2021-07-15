@@ -1,12 +1,7 @@
 package com.transtour.chofer.ui.activitys
 
-import android.annotation.SuppressLint
-import android.app.job.JobInfo
-import android.app.job.JobScheduler
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.DocumentsContract
@@ -14,20 +9,16 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.transtour.chofer.R
 import com.transtour.chofer.model.Travel
-import com.transtour.chofer.service.TravelInfoService
 import com.transtour.chofer.viewmodel.TravelViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.util.*
 
 
-class TravelActivity : AppCompatActivity() {
+class TravelActivity() : AppCompatActivity() {
 
     val TAG: String = "TravelActivity"
     lateinit var travelViewModel: TravelViewModel

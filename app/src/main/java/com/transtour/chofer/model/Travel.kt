@@ -1,9 +1,6 @@
 package com.transtour.chofer.model
 
-import com.google.gson.annotations.SerializedName
-import java.util.*
-
- class Travel{
+class Travel{
 
      //@SerializedName("travel_id")
      var id:String? = null

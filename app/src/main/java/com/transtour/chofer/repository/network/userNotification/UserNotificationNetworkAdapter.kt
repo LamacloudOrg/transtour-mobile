@@ -2,7 +2,6 @@ package com.transtour.chofer.repository.network.userNotification
 
 
 import android.content.Context
-import android.os.Environment
 import com.google.gson.GsonBuilder
 import com.transtour.chofer.repository.network.CustomInterceptor
 import com.transtour.chofer.repository.network.EndPointApi
@@ -31,7 +30,7 @@ object UserNotificationNetworkAdapter{
             .create()
 
         return Retrofit.Builder()
-            .baseUrl(EndPointApi.getEndPoint("local"))
+            .baseUrl(EndPointApi.getEndPoint("prod"))
             .client(httpClient)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()

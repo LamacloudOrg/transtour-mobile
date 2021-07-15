@@ -3,12 +3,9 @@ package com.transtour.chofer.repository.network
 import android.content.Context
 import com.transtour.chofer.R
 import java.security.KeyStore
-import java.security.SecureRandom
 import java.security.cert.Certificate
 import java.security.cert.CertificateFactory
-import javax.net.ssl.KeyManagerFactory
 import javax.net.ssl.SSLContext
-import javax.net.ssl.SSLSocketFactory
 import javax.net.ssl.TrustManagerFactory
 
 
