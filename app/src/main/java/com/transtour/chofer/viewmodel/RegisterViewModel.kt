@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.transtour.chofer.model.UserNotification
+import com.transtour.chofer.model.UserRegister
 import com.transtour.chofer.model.UserRegisterNotification
 import com.transtour.chofer.repository.network.user.UserNetworkAdapter
 import com.transtour.chofer.repository.network.userNotification.UserNotificationNetworkAdapter
@@ -17,9 +17,9 @@ class RegisterViewModel : ViewModel() {
 
     val resultado = MutableLiveData<Boolean>()
 
-    suspend fun execute (user: UserRegisterNotification, token:String, context: Context)= coroutineScope {
-       val res1 =  async {updateUserPassWord(user, context)}
-        val res2 = async { setFcmToken(token,user,context)}
+    suspend fun execute (user: UserRegisterNotification,password: String,context: Context)= coroutineScope {
+       val res1 =  async {updateUserPassWord(user.dni!!, password,context)}
+        val res2 = async { setFcmToken(user,context)}
 
         val result = res1.await() + res2.await()
         if (result == 2){
@@ -40,15 +40,20 @@ class RegisterViewModel : ViewModel() {
     }
 
     @OptIn
-    suspend fun updateUserPassWord(user: UserRegisterNotification, context: Context) : Int{
+    suspend fun updateUserPassWord(userId:Long, password:String, context: Context) : Int{
         var res : Int = 0;
         withContext(Dispatchers.IO) {
             try {
-                val response = UserNetworkAdapter.generateService(context).updateUserPassWord(user)
+                val userRegister  = UserRegister(userId,password)
+                val response = UserNetworkAdapter.generateService(context).updateUserPassWord(userRegister)
+                Log.d("update pass response", response.code().toString())
                 if (response.isSuccessful) {
                     res = 1
+                    Log.d("update pass body", response.body().toString())
                 } else{
                     res = 0
+                    Log.d("update pass  error", response.errorBody().toString())
+
                 }
 
             } catch (e: Exception) {
@@ -59,16 +64,21 @@ class RegisterViewModel : ViewModel() {
     }
 
     @OptIn
-    suspend fun setFcmToken(token:String, user:UserRegisterNotification, context: Context) : Int{
+    suspend fun setFcmToken(user:UserRegisterNotification, context: Context) : Int{
         var res : Int = 0;
         withContext(Dispatchers.IO) {
             try {
-                val userNotification = UserNotification(user.dni!!,token)
-                val response = UserNotificationNetworkAdapter.generateService(context).registerToken(userNotification)
+                val response = UserNotificationNetworkAdapter.generateService(context).registerToken(user)
+                Log.d("setFcmToken  response", response.code().toString())
+
                 if (response.isSuccessful) {
+                    Log.d("setFcmToken  response", response.body().toString())
+
                     res = 1
                 } else{
                     res = 0
+                    Log.d("fcmToker error", response.errorBody().toString())
+
                 }
 
             } catch (e: Exception) {

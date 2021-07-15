@@ -2,7 +2,7 @@ package com.transtour.chofer.model
 
 import com.google.gson.annotations.SerializedName
 
-class UserRegisterNotification constructor(id: Long, fcmToken: String){
+class UserRegisterNotification(id: Long?, fcmToken: String?){
 
     @SerializedName("id")
     var dni:Long? = null

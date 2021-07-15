@@ -31,7 +31,7 @@ object UserNetworkAdapter{
             .create()
 
         return Retrofit.Builder()
-            .baseUrl(EndPointApi.getEndPoint("prod"))
+            .baseUrl(EndPointApi.getEndPoint("local"))
             .client(httpClient)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()

@@ -12,7 +12,10 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.transtour.chofer.model.UserRegisterNotification
 import com.transtour.chofer.repository.network.userNotification.UserNotificationNetworkAdapter
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.time.LocalDate
 
 
@@ -68,13 +71,15 @@ class NotificationService: FirebaseMessagingService() {
     override fun onNewToken(fmcToken: String) {
         super.onNewToken(fmcToken);
         Log.i("NEW FCM TOKEN", fmcToken)
-        sendToken(fmcToken)
+        GlobalScope.launch{
+            sendToken(fmcToken)
+        }
     }
 
-      fun sendToken(token:String){
+      suspend fun sendToken(token:String){
         try {
             val userId = 1L
-            val userNotification = com.transtour.chofer.model.UserNotification(userId, token)
+            val userNotification = UserRegisterNotification(userId, token)
             val response = UserNotificationNetworkAdapter.generateService(baseContext).registerToken(userNotification)
 
         } catch (e: Exception) {

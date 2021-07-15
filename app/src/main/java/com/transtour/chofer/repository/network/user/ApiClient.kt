@@ -1,8 +1,7 @@
 package com.transtour.chofer.repository.network.user
 
-import com.google.gson.JsonObject
 import com.transtour.chofer.model.User
-import com.transtour.chofer.model.UserRegisterNotification
+import com.transtour.chofer.model.UserRegister
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Headers
@@ -14,7 +13,7 @@ interface ApiClient {
     suspend fun login(@Body user: User ): Response<String>
 
     @Headers("Accept: application/json")
-    @POST("api/v1/user/update/password")
-    suspend fun updateUserPassWord(@Body user: UserRegisterNotification ): Response<String>
+    @POST("api/service-user/v1/user/update/password")
+    suspend fun updateUserPassWord(@Body user: UserRegister ): Response<String>
 
 }

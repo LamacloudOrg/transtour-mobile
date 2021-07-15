@@ -2,19 +2,19 @@ package com.transtour.chofer.model
 
 import com.google.gson.annotations.SerializedName
 
-class UserNotification constructor(id: Long, fcmToken: String){
+class UserRegister constructor(id: Long, password: String?){
 
     @SerializedName("id")
     var id:Long? = null
-    @SerializedName("fcmToken")
-    var fcmToken:String? = null
+    @SerializedName("password")
+    var password:String? = null
 
     init {
         this.id = id
-        this.fcmToken = fcmToken
+        this.password = password
     }
 
     override fun toString(): String {
-        return "id:${id} fcmToken:${fcmToken}"
+        return "id:${id} password:${password}"
     }
 }

@@ -15,16 +15,15 @@ import com.transtour.chofer.App
 import com.transtour.chofer.R
 import com.transtour.chofer.model.User
 import com.transtour.chofer.model.UserRegisterNotification
-import com.transtour.chofer.service.NotificationService
-import com.transtour.chofer.viewmodel.LoginViewModel
 import com.transtour.chofer.viewmodel.RegisterViewModel
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class RegisterActivity() : AppCompatActivity() {
 
     var user: User = User()
-
-  //  @Inject
+    @Inject
     lateinit var registerViewModel: RegisterViewModel
     private lateinit var editTextNameUser: EditText
     private lateinit var editTextToken: EditText
@@ -34,16 +33,36 @@ class RegisterActivity() : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-      //  (application as App).getComponent().inject(this)
+        (application as App).getComponent().inject(this)
         configView()
         getAndSetTokenMobileInContext(applicationContext)
-        registerViewModel = RegisterViewModel()
+
+
+
     }
 
     fun configView() {
+        //registerViewModel = RegisterViewModel()
         editTextNameUser = findViewById(R.id.editextUserNameRegister)
         editTextToken = findViewById(R.id.editTextPasswordToken)
         editTextPassword = findViewById(R.id.editTextPasswordRegister)
+
+        //TODO update del password en user backend
+        val  observer = Observer<Boolean>(){
+                isOK ->
+            if (isOK){
+                Toast.makeText(this,"Usuario ok",Toast.LENGTH_LONG).show()
+                val intent = Intent(this@RegisterActivity,LoginActivity::class.java).apply {
+                    putExtra("userName", "kike")
+                }
+                startActivity(intent)
+            }else{
+                Toast.makeText(this,"Usuario error",Toast.LENGTH_LONG).show()
+
+            }
+        }
+
+        registerViewModel!!.resultado.observe(this,observer)
     }
 
     fun getAndSetTokenMobileInContext (context:Context){
@@ -65,24 +84,18 @@ class RegisterActivity() : AppCompatActivity() {
     fun registerAction(v: View) {
         Log.i("hola", "hola")
 
-        var user: UserRegisterNotification = UserRegisterNotification(123L, "123asd")
+        val sharedPref = v.context.getSharedPreferences(
+            "transtour.mobile", Context.MODE_PRIVATE)
 
-        //TODO update del password en user backend
-        val  observer = Observer<Boolean>(){
-                isOK ->
-            if (isOK){
-                Toast.makeText(this,"Usuario ok",Toast.LENGTH_LONG).show()
-                val intent = Intent(this@RegisterActivity,LoginActivity::class.java).apply {
-                    putExtra("userName", user.dni)
-                }
-                startActivity(intent)
-            }else{
-                Toast.makeText(this,"Usuario error",Toast.LENGTH_LONG).show()
+        val userId:String? = editTextNameUser.text.toString()
+        val password:String? = editTextPassword.text.toString()
+        var user: UserRegisterNotification = UserRegisterNotification(userId?.toLong(), sharedPref.getString("fcmToken",""))
 
+        GlobalScope.launch{
+            if (password != null) {
+                registerViewModel!!.execute(user,password,v.context)
             }
         }
-
-        registerViewModel!!.resultado.observe(this,observer)
 
 
         //TODO update del cp en notification backend
