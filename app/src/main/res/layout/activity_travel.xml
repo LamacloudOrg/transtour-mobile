@@ -65,37 +65,37 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tvViajeHora"
+                android:id="@+id/tvDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="12:30" />
 
             <TextView
-                android:id="@+id/tvPasajeroDocumento"
+                android:id="@+id/tvPassenger"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="43.213.213" />
 
             <TextView
-                android:id="@+id/tvPasajeroTelefono"
+                android:id="@+id/tvOrigin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="11892021" />
 
             <TextView
-                android:id="@+id/tvViajeFecha"
+                android:id="@+id/tvDestiny"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="12/04/2020" />
 
             <TextView
-                android:id="@+id/tvPasajeroNombre"
+                android:id="@+id/tvObeservation"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="55dp"
                 android:layout_weight="1"
                 android:text="Juan Manuel" />
         </LinearLayout>

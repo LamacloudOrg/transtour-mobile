@@ -24,9 +24,10 @@ class TravelActivity() : AppCompatActivity() {
     lateinit var travelViewModel: TravelViewModel
     lateinit var tvViajeHora: TextView
     lateinit var tvViajeFecha: TextView
-    lateinit var tvPasajeroDocumento: TextView
-    lateinit var tvPasajeroTelefono :TextView
-    lateinit var tvPasajeroNombre:TextView
+    lateinit var tvPassenger: TextView
+    lateinit var tvOrigin :TextView
+    lateinit var tvDestiny:TextView
+    lateinit var tvObservation:TextView
 
     var passanger: String? = null
     var date: String? = null
@@ -57,15 +58,24 @@ class TravelActivity() : AppCompatActivity() {
         configView()
     }
 
+    override fun onResume() {
+        super.onResume()
+        GlobalScope.launch {
+            getTravel()
+        }
+
+    }
+
 
     fun  configView(){
 
         travelViewModel = TravelViewModel()
-        tvViajeHora = findViewById(R.id.tvViajeHora)
-        tvViajeFecha = findViewById(R.id.tvViajeFecha)
-        tvPasajeroDocumento = findViewById(R.id.tvPasajeroDocumento)
-        tvPasajeroTelefono = findViewById(R.id.tvPasajeroTelefono)
-        tvPasajeroNombre = findViewById(R.id.tvPasajeroNombre)
+        tvViajeHora =  findViewById(R.id.tvDate)
+        tvViajeFecha = findViewById(R.id.tvDate)
+        tvPassenger =  findViewById(R.id.tvPassenger)
+        tvOrigin=      findViewById(R.id.tvOrigin)
+        tvDestiny =   findViewById(R.id.tvDestiny)
+        tvObservation = findViewById(R.id.tvObeservation)
         btnRefreshTravel = findViewById(R.id.btnRefreshTravel)
 
 
@@ -91,60 +101,35 @@ class TravelActivity() : AppCompatActivity() {
 
 
      fun display(travel:Travel){
-        tvViajeHora.text = travel.hour
-        tvViajeFecha.text = travel.date
-        tvPasajeroNombre.text = travel.passenger
+        tvViajeFecha.text = travel.date + " "+travel.hour
+        tvPassenger.text = travel.passenger
+        tvOrigin.text = travel.origin
+        tvDestiny.text = travel.destiny
+        tvObservation.text = "No aplica"
 
     }
 
 
     fun signDocument(view: View) {
 
-        val path = Environment.getExternalStorageState()
-        val fileName ="Payment Voucher Template PDF.pdf"
-        val id_file  = 1
+        //val path = Environment.getExternalStorageState()
+        //val fileName ="Payment Voucher Template PDF.pdf"
+        //val id_file  = 1
 
-        val intent = getPackageManager().getLaunchIntentForPackage("com.xodo.pdf.reader");
+        //val intent = getPackageManager().getLaunchIntentForPackage("com.xodo.pdf.reader");
+
+
+        val intent = getPackageManager().getLaunchIntentForPackage("com.aceprog.easysignature");
+
         if (intent != null) {
-               intent.apply {
+               intent?.apply {
                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                   addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                   putExtra(DocumentsContract.EXTRA_INITIAL_URI, path + "/" + fileName)
+//                   addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+//                   putExtra(DocumentsContract.EXTRA_INITIAL_URI, path + "/" + fileName)
 
                }
              startActivity(intent)
         }
     }
-
-
-   /* fun scheduleJob(v: View?) {
-     val componentName =  ComponentName(applicationContext, TravelInfoService::class.java)
-        val info =
-            JobInfo.Builder(123, componentName)
-                .setRequiresCharging(true)
-                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
-                .setPersisted(true)
-                    .setPeriodic(5000)
-                .build()
-
-        val scheduler = getSystemService(JOB_SCHEDULER_SERVICE) as JobScheduler
-        val resultCode = scheduler.schedule(info)
-        if (resultCode == JobScheduler.RESULT_SUCCESS) {
-            Log.i(TAG, "Job scheduled")
-        } else {
-            Log.i(TAG, "Job scheduling failed")
-        }
-    }
-
-
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    fun cancelJob(v: View?) {
-      val scheduler = getSystemService(JOB_SCHEDULER_SERVICE) as JobScheduler
-        scheduler.cancel(123)
-        Log.i(TAG, "Job cancelled")
-
-    }
-
-    */
 
 }

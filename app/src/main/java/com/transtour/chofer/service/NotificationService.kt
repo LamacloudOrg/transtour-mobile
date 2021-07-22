@@ -40,7 +40,6 @@ class NotificationService: FirebaseMessagingService() {
 
             val notification = android.app.Notification.Builder(applicationContext)
                 .setContentTitle(it.title)
-                .setContentText("New travel "+ LocalDate.now().toString())
                 .setSmallIcon(R.drawable.ic_dialog_alert)
                 .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.ic_dialog_alert))
                 .build()
