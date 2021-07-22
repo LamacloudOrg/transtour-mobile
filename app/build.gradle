@@ -53,6 +53,8 @@ android {
         implementation 'androidx.fragment:fragment-ktx:1.2.2'
         implementation 'com.google.gms:google-services:4.3.5'
 
+        implementation 'com.kyanogen.signatureview:signature-view:1.2'
+
         // Import the BoM for the Firebase platform
         implementation platform('com.google.firebase:firebase-bom:28.0.1')
 

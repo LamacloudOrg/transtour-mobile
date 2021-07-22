@@ -10,6 +10,8 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.result.registerForActivityResult
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.transtour.chofer.R
@@ -112,31 +114,8 @@ class TravelActivity() : AppCompatActivity() {
 
 
     fun signDocument(view: View) {
-
-        //val path = Environment.getExternalStorageState()
-        //val fileName ="Payment Voucher Template PDF.pdf"
-        //val id_file  = 1
-
-        //val intent = getPackageManager().getLaunchIntentForPackage("com.xodo.pdf.reader");
-
-
-        var intent = getPackageManager().getLaunchIntentForPackage("com.aceprog.easysignature");
-
-        if (intent != null) {
-               intent?.apply {
-                   addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-//                   addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-//                   putExtra(DocumentsContract.EXTRA_INITIAL_URI, path + "/" + fileName)
-
-               }
-             startActivity(intent)
-        }else {
-            // Bring user to the market or let them choose an app?
-            intent = Intent(Intent.ACTION_VIEW);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.setData(Uri.parse("market://details?id=" + "com.aceprog.easysignature"));
-            startActivity(intent);
-        }
+        val intent = Intent(view.context, SignatureActivity::class.java)
+        startActivity(intent)
     }
 
 }
