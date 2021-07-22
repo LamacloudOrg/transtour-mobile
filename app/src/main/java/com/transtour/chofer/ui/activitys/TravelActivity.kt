@@ -2,6 +2,7 @@ package com.transtour.chofer.ui.activitys
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.DocumentsContract
@@ -119,7 +120,7 @@ class TravelActivity() : AppCompatActivity() {
         //val intent = getPackageManager().getLaunchIntentForPackage("com.xodo.pdf.reader");
 
 
-        val intent = getPackageManager().getLaunchIntentForPackage("com.aceprog.easysignature");
+        var intent = getPackageManager().getLaunchIntentForPackage("com.aceprog.easysignature");
 
         if (intent != null) {
                intent?.apply {
@@ -129,6 +130,12 @@ class TravelActivity() : AppCompatActivity() {
 
                }
              startActivity(intent)
+        }else {
+            // Bring user to the market or let them choose an app?
+            intent = Intent(Intent.ACTION_VIEW);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setData(Uri.parse("market://details?id=" + "com.aceprog.easysignature"));
+            startActivity(intent);
         }
     }
 
