@@ -31,14 +31,16 @@ class SignatureActivity : AppCompatActivity() {
         save = findViewById(R.id.signatureSave)
         clear = findViewById(R.id.signatureClear)
 
+
         clear.setOnClickListener { it ->
             signatureView.clearCanvas()
         }
 
         save.setOnClickListener { it ->
-            bitmap=signatureView.getSignatureBitmap()
+            bitmap=signatureView.signatureBitmap
             path=saveImage(bitmap)
         }
+
     }
 
     fun saveImage(bitmap: Bitmap?) :String {
