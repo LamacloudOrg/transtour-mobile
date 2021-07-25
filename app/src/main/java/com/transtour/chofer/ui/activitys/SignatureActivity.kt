@@ -1,5 +1,6 @@
 package com.transtour.chofer.ui.activitys
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.os.Environment
@@ -23,6 +24,7 @@ class SignatureActivity : AppCompatActivity() {
     private var path: String = ""
     private var image_DIRECTORY: String = "/sing"
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signature)
@@ -39,8 +41,14 @@ class SignatureActivity : AppCompatActivity() {
         save.setOnClickListener { it ->
             bitmap=signatureView.signatureBitmap
             path=saveImage(bitmap)
-        }
 
+            val intent:Intent = Intent()
+            intent.apply {
+                putExtra("path",path)
+            }
+            setResult(RESULT_OK, intent);
+            finish();
+        }
     }
 
     fun saveImage(bitmap: Bitmap?) :String {

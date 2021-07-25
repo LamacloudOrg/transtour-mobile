@@ -1,17 +1,15 @@
 package com.transtour.chofer.ui.activitys
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
-import android.provider.DocumentsContract
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.result.registerForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.transtour.chofer.R
@@ -32,8 +30,11 @@ class TravelActivity() : AppCompatActivity() {
     lateinit var tvDestiny:TextView
     lateinit var tvObservation:TextView
 
+    lateinit var btnFinisih:Button
+
     var passanger: String? = null
     var date: String? = null
+    val SECOND_ACTIVITY_REQUEST_CODE:Int =1
 
     lateinit var  btnRefreshTravel:Button
 
@@ -80,7 +81,12 @@ class TravelActivity() : AppCompatActivity() {
         tvDestiny =   findViewById(R.id.tvDestiny)
         tvObservation = findViewById(R.id.tvObeservation)
         btnRefreshTravel = findViewById(R.id.btnRefreshTravel)
+        btnFinisih = findViewById(R.id.btnFinish)
 
+        btnFinisih.setOnClickListener{
+            val intent = Intent(applicationContext, SignatureActivity::class.java)
+            startActivityForResult(intent,SECOND_ACTIVITY_REQUEST_CODE)
+        }
 
 
         val  observer = Observer<Travel>(){
@@ -112,10 +118,19 @@ class TravelActivity() : AppCompatActivity() {
 
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+       super.onActivityResult(requestCode, resultCode, data)
 
-    fun signDocument(view: View) {
-        val intent = Intent(view.context, SignatureActivity::class.java)
-        startActivity(intent)
+        // check that it is the SecondActivity with an OK result
+        if (requestCode == SECOND_ACTIVITY_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) { // Activity.RESULT_OK
+
+                // get String data from Intent
+                val path = data?.getStringExtra("path")
+                //TODO Inpactar firma.
+                Toast.makeText(applicationContext,"Path "+path,Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
 }

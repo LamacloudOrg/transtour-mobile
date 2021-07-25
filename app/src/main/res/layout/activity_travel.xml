@@ -15,18 +15,17 @@
         tools:layout_editor_absoluteX="16dp">
 
         <Button
-            android:id="@+id/btnFinish"
+            android:id="@+id/btnStart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="start" />
 
         <Button
-            android:id="@+id/btnStart"
+            android:id="@+id/btnFinish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="signDocument"
             android:text="finish" />
     </LinearLayout>
 
