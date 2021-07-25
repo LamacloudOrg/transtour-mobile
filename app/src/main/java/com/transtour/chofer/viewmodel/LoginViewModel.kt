@@ -5,11 +5,12 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.transtour.chofer.model.User
-import com.transtour.chofer.repository.network.user.UserNetworkAdapter
+import com.transtour.chofer.repository.network.user.ApiClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class LoginViewModel() :ViewModel()  {
+class LoginViewModel @Inject constructor (private val api: ApiClient) :ViewModel()  {
 
     val resultado = MutableLiveData<Boolean>()
 
@@ -17,7 +18,9 @@ class LoginViewModel() :ViewModel()  {
         withContext(Dispatchers.IO) {
             try {
 
-                val response = UserNetworkAdapter.generateService(context).login(user)
+                val response = api.login(user)
+
+                //val response = UserNetworkAdapter.generateService(context).login(user)
                 if (response.isSuccessful) {
                     resultado.postValue(true)
                     //TODO save in

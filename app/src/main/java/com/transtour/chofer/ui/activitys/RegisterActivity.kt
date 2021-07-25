@@ -45,28 +45,18 @@ class RegisterActivity() : AppCompatActivity() {
         val observerRegistration = Observer<Boolean> { isOK ->
             if (isOK) {
                 Toast.makeText(this, "Usuario ok", Toast.LENGTH_LONG).show()
-                val intent = Intent(this@RegisterActivity, LoginActivity::class.java).apply {
+                val intent = Intent(applicationContext, LoginActivity::class.java).apply {
                     putExtra("userName", "kike")
                 }
                 startActivity(intent)
+                finish()
             } else {
                 Toast.makeText(this, "Usuario error", Toast.LENGTH_LONG).show()
 
             }
         }
 
-        /*
-        val observerToken = Observer<String> { token ->
-            if (token.isNotEmpty()) {
-                editTextToken.setText(token)
-            } else {
-                editTextToken.setText("")
-            }
-        }
-        */
-
         registerViewModel.resultado.observe(this, observerRegistration)
-    //    registerViewModel.token.observe(this, observerToken)
     }
 
    //@RequiresApi(Build.VERSION_CODES.GINGERBREAD)
@@ -115,25 +105,10 @@ class RegisterActivity() : AppCompatActivity() {
         }
 
         GlobalScope.launch {
-            registerViewModel.registUser(user, password, v.context)
+            registerViewModel.registUser(user, password)
         }
 
     }
 
-    /*
-    fun getTokenRegistration(view: View) {
-        val userId: String = editTextNameUser.text.toString()
-
-        if (userId.isBlank()){
-            editTextNameUser.setError("No se puede ser vacio",null)
-            return
-        }
-
-        GlobalScope.launch {
-            registerViewModel.tokenRegistration()
-        }
-
-    }
-    */
 
 }

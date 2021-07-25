@@ -6,21 +6,23 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.transtour.chofer.model.UserRegister
 import com.transtour.chofer.model.UserRegisterNotification
-import com.transtour.chofer.repository.network.user.UserNetworkAdapter
+import com.transtour.chofer.repository.network.user.ApiClient
+import com.transtour.chofer.repository.network.userNotification.ApiUserNotification
 import com.transtour.chofer.repository.network.userNotification.UserNotificationNetworkAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class RegisterViewModel() : ViewModel() {
+class RegisterViewModel  @Inject constructor(private val apiClient: ApiClient, private val apiUserNotification: ApiUserNotification) : ViewModel() {
 
     val resultado = MutableLiveData<Boolean>()
-    val token = MutableLiveData<String>()
+   // val token = MutableLiveData<String>()
 
-    suspend fun registUser (user: UserRegisterNotification,password: String,context: Context)= coroutineScope {
-       val res1 =  async {updateUserPassWord(user.dni!!, password,context)}
-        val res2 = async { setFcmToken(user,context)}
+    suspend fun registUser (user: UserRegisterNotification,password: String)= coroutineScope {
+       val res1 =  async {updateUserPassWord(user.dni!!, password)}
+        val res2 = async { setFcmToken(user)}
 
         val result = res1.await() + res2.await()
         if (result == 2){
@@ -41,12 +43,12 @@ class RegisterViewModel() : ViewModel() {
     }
 
     @OptIn
-    suspend fun updateUserPassWord(userId:Long, password:String, context: Context) : Int{
+    suspend fun updateUserPassWord(userId:Long, password:String) : Int{
         var res : Int = 0;
         withContext(Dispatchers.IO) {
             try {
-                val userRegister  = UserRegister(userId,password)
-                val response = UserNetworkAdapter.generateService(context).updateUserPassWord(userRegister)
+                val userRegister:UserRegister  = UserRegister(userId,password)
+                val response = apiClient.updateUserPassWord(userRegister)
                 Log.d("update pass response", response.code().toString())
                 if (response.isSuccessful) {
                     res = 1
@@ -65,11 +67,11 @@ class RegisterViewModel() : ViewModel() {
     }
 
     @OptIn
-    suspend fun setFcmToken(user:UserRegisterNotification, context: Context) : Int{
+    suspend fun setFcmToken(user:UserRegisterNotification) : Int{
         var res : Int = 0;
         withContext(Dispatchers.IO) {
             try {
-                val response = UserNotificationNetworkAdapter.generateService(context).registerToken(user)
+                val response = apiUserNotification.registerToken(user)
                 Log.d("setFcmToken  response", response.code().toString())
 
                 if (response.isSuccessful) {
@@ -89,8 +91,5 @@ class RegisterViewModel() : ViewModel() {
         return res;
     }
 
-    suspend fun tokenRegistration() {
-        TODO("Not yet implemented")
-    }
 
 }

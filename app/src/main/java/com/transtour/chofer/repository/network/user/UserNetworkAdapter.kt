@@ -21,7 +21,7 @@ object UserNetworkAdapter{
         val httpClient = OkHttpClient.Builder()
             .apply {
                 addNetworkInterceptor(CustomInterceptor())
-                sslSocketFactory(Ssl.generateCetificate(context)?.socketFactory)
+               // sslSocketFactory(Ssl.generateCetificate()?.socketFactory)
                 hostnameVerifier(allHostsValid)
 
             }.build()

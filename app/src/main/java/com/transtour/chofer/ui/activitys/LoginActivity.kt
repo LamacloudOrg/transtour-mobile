@@ -8,12 +8,12 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import com.transtour.chofer.App
 import com.transtour.chofer.R
 import com.transtour.chofer.model.User
 import com.transtour.chofer.viewmodel.LoginViewModel
 import kotlinx.coroutines.*
 import javax.inject.Inject
+import com.transtour.chofer.App as App
 
 class LoginActivity() : AppCompatActivity() {
     var user:User = User()
@@ -39,7 +39,7 @@ class LoginActivity() : AppCompatActivity() {
             isOK ->
                 if (isOK){
                     Toast.makeText(this,"Usuario ok",Toast.LENGTH_LONG).show()
-                    val intent = Intent(this@LoginActivity,TravelActivity::class.java).apply {
+                    val intent = Intent(applicationContext,TravelActivity::class.java).apply {
                         putExtra("userName", user.userName)
                     }
                     startActivity(intent)
@@ -67,8 +67,9 @@ class LoginActivity() : AppCompatActivity() {
      }
 
     fun registerAction(v: View) {
-        val intent = Intent(v.context,RegisterActivity::class.java)
+        val intent = Intent(v.context.applicationContext,RegisterActivity::class.java)
             startActivity(intent)
+            finish()
     }
 
 }

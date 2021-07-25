@@ -6,7 +6,7 @@ import retrofit2.http.Body
 import retrofit2.http.Headers
 import retrofit2.http.POST
 
-interface ApiClient {
+interface ApiUserNotification {
     @Headers("Accept: application/json")
     @POST("api/service-notification/v1/notification/registerToken")
     suspend fun registerToken(@Body userNotification: UserRegisterNotification ): Response<String>

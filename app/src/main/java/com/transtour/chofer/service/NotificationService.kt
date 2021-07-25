@@ -70,16 +70,16 @@ class NotificationService: FirebaseMessagingService() {
     override fun onNewToken(fmcToken: String) {
         super.onNewToken(fmcToken);
         Log.i("NEW FCM TOKEN", fmcToken)
-        GlobalScope.launch{
-            sendToken(fmcToken)
-        }
+        //GlobalScope.launch{
+        //    sendToken(fmcToken)
+        //}
     }
 
       suspend fun sendToken(token:String){
         try {
             val userId = 1L
-            val userNotification = UserRegisterNotification(userId, token)
-            val response = UserNotificationNetworkAdapter.generateService(baseContext).registerToken(userNotification)
+          //  val userNotification = UserRegisterNotification(userId, token)
+          //  val response = UserNotificationNetworkAdapter.generateService(baseContext).registerToken(userNotification)
 
         } catch (e: Exception) {
         Log.d("Exception notification", e.localizedMessage)
