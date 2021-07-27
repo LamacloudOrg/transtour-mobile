@@ -13,7 +13,7 @@ class TravelViewModel(): ViewModel()  {
     val TAG:String = "TravelViewModel"
 
 
-    suspend fun  getTravel(context: Context){
+     fun  getTravel(context: Context){
 
         val sharedPref = context?.getSharedPreferences(
             "transtour.mobile", Context.MODE_PRIVATE)

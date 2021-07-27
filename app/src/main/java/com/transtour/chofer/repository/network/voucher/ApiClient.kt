@@ -10,5 +10,5 @@ import retrofit2.http.Part
 
 interface ApiClient {
     @POST("api/service-voucher/v1/voucher/signature")
-    suspend fun registerToken(@Body singture:Signature): Response<String>
+    suspend fun signVoucher(@Body singture:Signature): Response<String>
 }
