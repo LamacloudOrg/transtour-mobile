@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 class UserRegister constructor(id: Long, password: String?){
 
-    @SerializedName("id")
+    @SerializedName("dni")
     var id:Long? = null
     @SerializedName("password")
     var password:String? = null

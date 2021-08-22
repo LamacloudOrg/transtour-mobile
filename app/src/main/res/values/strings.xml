@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">transtourChofer</string>
     <string name="end_point">http://172.28.0.1:8088/</string>
-    <string name="user">User</string>
+    <string name="user">DNI</string>
     <string name="password">Password</string>
     <string name="login">LOGIN</string>
     <string name="register">REGISTER</string>

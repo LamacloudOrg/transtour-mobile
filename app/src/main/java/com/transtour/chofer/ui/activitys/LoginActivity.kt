@@ -40,7 +40,7 @@ class LoginActivity() : AppCompatActivity() {
                 if (isOK){
                     Toast.makeText(this,"Usuario ok",Toast.LENGTH_LONG).show()
                     val intent = Intent(this@LoginActivity,TravelActivity::class.java).apply {
-                        putExtra("userName", user.userName)
+                        putExtra("userName", user.dni)
                     }
                     startActivity(intent)
                 }else{
@@ -61,7 +61,7 @@ class LoginActivity() : AppCompatActivity() {
      }
 
      private suspend fun isUser() {
-        user.userName = editTextName.text.toString()
+        user.dni = editTextName.text.toString().toLong()
         user.password = editTextPassword.text.toString()
          loginViewModel.authenticate(user,applicationContext)
      }

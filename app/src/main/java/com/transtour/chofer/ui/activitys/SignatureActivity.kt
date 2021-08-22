@@ -56,19 +56,18 @@ class SignatureActivity : AppCompatActivity() {
         var fileDirectory: File? = null
         var result = ""
 
-        if (android.os.Build.VERSION.SDK_INT >= 29) {
-            fileDirectory = File(getExternalFilesDir(Environment.DIRECTORY_DCIM) , image_DIRECTORY)
-        } else {
-            fileDirectory = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) , image_DIRECTORY)
-        }
+        fileDirectory = File(getExternalFilesDir(Environment.DIRECTORY_DCIM) , image_DIRECTORY)
 
         if (!fileDirectory.exists()){
             fileDirectory.mkdirs()
             Log.d("file directory: ", fileDirectory.toString())
         }
 
-        val file = File(fileDirectory, "${UUID.randomUUID()}.jpg")
+        val file = File(fileDirectory, "${UUID.randomUUID()}.jPEG")
+        file.createNewFile()
+
         try {
+
             val stream: OutputStream = FileOutputStream(file)
 
             // Compress the bitmap

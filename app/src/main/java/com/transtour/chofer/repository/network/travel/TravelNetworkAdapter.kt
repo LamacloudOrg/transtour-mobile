@@ -1,37 +1,41 @@
 package com.transtour.chofer.repository.network.travel
 
+import android.content.Context
 import com.google.gson.GsonBuilder
 import com.transtour.chofer.repository.network.CustomInterceptor
+import com.transtour.chofer.repository.network.EndPointApi
+import com.transtour.chofer.repository.network.Ssl
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.net.ssl.HostnameVerifier
 
-object
-
-
-TravelNetworkAdapter {
+object TravelNetworkAdapter {
 
 
 
-        //val endPoint:String =  Resources.getSystem().getString(R.string.end_point)
+        fun generateService(context: Context): ApiClient {
 
-        val endPoint:String ="http://172.26.0.1:8088/"
+                val allHostsValid = HostnameVerifier { _, _ -> true }
 
+                val httpClient = OkHttpClient.Builder()
+                        .apply {
+                                addNetworkInterceptor(CustomInterceptor())
+                                sslSocketFactory(Ssl.generateCetificate(context)?.socketFactory)
+                                hostnameVerifier(allHostsValid)
 
-        val httpClient = OkHttpClient.Builder()
-                .apply {
-                    addNetworkInterceptor(CustomInterceptor())
-                }.build()
+                        }.build()
 
-        var gson = GsonBuilder()
-                .setLenient()
-                .create()
+                var gson = GsonBuilder()
+                        .setLenient()
+                        .create()
 
-        val apiClient: ApiClient = Retrofit.Builder()
-                .baseUrl(endPoint)
-                .client(httpClient)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build()
-                .create(ApiClient::class.java)
+                return Retrofit.Builder()
+                        .baseUrl(EndPointApi.getEndPoint("prod"))
+                        .client(httpClient)
+                        .addConverterFactory(GsonConverterFactory.create(gson))
+                        .build()
+                        .create(ApiClient::class.java)
 
+        }
 }
