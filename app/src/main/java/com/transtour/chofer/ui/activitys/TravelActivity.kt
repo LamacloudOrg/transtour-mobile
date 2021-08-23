@@ -60,8 +60,8 @@ class TravelActivity() : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_travel)
 
-        val intent:Intent = intent
-        val user: String? = intent.getStringExtra("userName");
+       // val intent:Intent = intent
+       //  val user: Int? = intent.getIntExtra("userName");
 
         passanger = intent.getStringExtra("passanger")
         date = intent.getStringExtra("date")
@@ -75,7 +75,7 @@ class TravelActivity() : AppCompatActivity() {
 
 
         val textViewChofer:TextView = findViewById(R.id.tvChoferNombre)
-        textViewChofer.text = user
+        textViewChofer.text ="nombre chofer"
 
         configView()
     }
@@ -83,6 +83,7 @@ class TravelActivity() : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         GlobalScope.launch {
+            clearAll()
             getTravel()
         }
 
@@ -173,15 +174,8 @@ class TravelActivity() : AppCompatActivity() {
         val  signatureObserver = Observer<Boolean>(){
                 isOk ->
                 if (isOk){
-
-                    etWaitingTime.isEnabled = false
-                    etToll.isEnabled = false
-                    etparkingAmount.isEnabled = false
-                    editTextTaxForReturn.isEnabled = false
-                    val view = this.window.decorView
-                    view.setBackgroundColor(100);
-                    btnFinisih.isEnabled = false
-
+                    clearAll()
+                    removeTravel()
                     Toast.makeText(applicationContext,"La firma se impacto correctamente",Toast.LENGTH_LONG).show()
                 }else{
                     Toast.makeText(applicationContext,"No se pudo impactar intente nuevamente",Toast.LENGTH_LONG).show()
@@ -212,8 +206,39 @@ class TravelActivity() : AppCompatActivity() {
 
     }
 
+    private fun removeTravel() {
+        travelViewModel.removeTravel(applicationContext)
+    }
 
-    suspend fun getTravel() {
+    private fun clearAll() {
+        tvViajeHora.isEnabled = true
+        tvViajeHora.setText("")
+        tvViajeHora.isEnabled = false
+        tvViajeFecha.isEnabled = true
+        tvViajeFecha.setText("")
+        tvViajeFecha.isEnabled = false
+        tvPassenger.isEnabled = true
+        tvPassenger.setText("")
+        tvPassenger.isEnabled = false
+        tvOrigin.isEnabled = true
+        tvOrigin.setText("")
+        tvOrigin.isEnabled = false
+        tvDestiny.isEnabled = true
+        tvDestiny.setText("")
+        tvDestiny.isEnabled = false
+        tvObservation.isEnabled = true
+        tvObservation.setText("")
+        tvObservation.isEnabled = false
+        etWaitingTime.setText("")
+        etToll.setText("")
+        etparkingAmount.setText("")
+        editTextTaxForReturn.setText("")
+        tvtotalCost.isEnabled = true
+        tvtotalCost.setText("")
+    }
+
+
+     fun getTravel() {
         travelViewModel.getTravel(applicationContext)
     }
 

@@ -21,7 +21,7 @@ import java.time.LocalDate
 
 class NotificationService: FirebaseMessagingService() {
 
-
+    val travelSet = mutableSetOf<String>()
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
@@ -59,7 +59,8 @@ class NotificationService: FirebaseMessagingService() {
             with (sharedPref?.edit()){
                 val gson = com.google.gson.Gson()
                 val json = gson.toJson(it)
-                this?.putString("travel-new", json.toString())
+                travelSet.add(json)
+                this?.putStringSet("travelList", travelSet)
                 this?.apply()
             }
 

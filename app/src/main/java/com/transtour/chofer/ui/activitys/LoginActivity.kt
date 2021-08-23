@@ -1,5 +1,6 @@
 package com.transtour.chofer.ui.activitys
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -29,6 +30,15 @@ class LoginActivity() : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         (application as App).getComponent().inject(this)
         configView()
+
+        val sharedPref = applicationContext?.getSharedPreferences(
+            "transtour.mobile", Context.MODE_PRIVATE)
+
+        //solo para debug
+        with (sharedPref?.edit()){
+            this?.putStringSet("travelList", mutableSetOf())
+            this?.apply()
+        }
     }
 
      fun  configView(){
