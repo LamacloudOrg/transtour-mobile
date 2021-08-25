@@ -82,8 +82,8 @@ class TravelActivity() : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        clearAll()
         GlobalScope.launch {
-            clearAll()
             getTravel()
         }
 
@@ -277,6 +277,7 @@ class TravelActivity() : AppCompatActivity() {
                 val file = File(path)
                 val base64 =convertToBase64(file)
                 val signature = Signature(travelId,base64,"png")
+                file.delete()
 
                 Log.d(TAG,"Impactando firma travel ${travelId}")
                 GlobalScope.launch {

@@ -35,10 +35,11 @@ class LoginActivity() : AppCompatActivity() {
             "transtour.mobile", Context.MODE_PRIVATE)
 
         //solo para debug
-        with (sharedPref?.edit()){
-            this?.putStringSet("travelList", mutableSetOf())
-            this?.apply()
-        }
+
+        //with (sharedPref?.edit()){
+        //    this?.putStringSet("travelList", mutableSetOf())
+        //    this?.apply()
+        //}
     }
 
      fun  configView(){
