@@ -59,8 +59,8 @@ class NotificationService: FirebaseMessagingService() {
             with (sharedPref?.edit()){
                 val gson = com.google.gson.Gson()
                 val json = gson.toJson(it)
-                travelSet.add(json)
-                this?.putStringSet("travelList", travelSet)
+                //travelSet.add(json)
+                this?.putString("travel-new", json.toString())
                 this?.apply()
             }
 
