@@ -46,6 +46,8 @@ class TravelActivity() : AppCompatActivity() {
     lateinit var  tvtotalCost:EditText
     lateinit var btnFinisih:Button
     lateinit var  btnRefreshTravel:Button
+    lateinit var  btnLogout:Button
+
 
 
     var totalCost:Double = 0.00
@@ -107,6 +109,14 @@ class TravelActivity() : AppCompatActivity() {
         etparkingAmount =findViewById(R.id.editTextParking)
         editTextTaxForReturn = findViewById(R.id.editTextTaxForReturn)
         tvtotalCost = findViewById(R.id.tvTotalCost)
+        btnLogout = findViewById(R.id.btnLogout)
+
+
+        btnLogout.setOnClickListener{
+            val intent = Intent(applicationContext,LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
 
         btnFinisih.setOnClickListener{

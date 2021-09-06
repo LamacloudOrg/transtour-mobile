@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F2F2F2"
+    android:background="#307DA5"
     tools:context=".ui.activitys.TravelActivity">
 
     <LinearLayout
-        android:id="@+id/llButons"
+        android:id="@+id/mainButtons"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:orientation="horizontal"
@@ -20,6 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="#4984a3"
             android:text="actualizar" />
 
         <Button
@@ -27,7 +28,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="#4984a3"
             android:text="firmar" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/otherButtons"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/mainButtons"
+        tools:layout_editor_absoluteX="16dp">
+
+        <Button
+            android:id="@+id/btnRefresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#4984a3"
+            android:text="refresh" />
+
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#4984a3"
+            android:text="logout" />
     </LinearLayout>
 
     <LinearLayout
@@ -40,7 +68,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -117,21 +145,23 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/travelData"
             android:orientation="vertical">
 
             <EditText
                 android:id="@+id/tvDate"
+                style="@style/EditText"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:enabled="false"
                 android:text=""
-                style="@style/EditText"
-                android:enabled="false"/>
+                android:textColor="@color/white" />
 
             <EditText
                 android:id="@+id/tvPassenger"
+                android:textColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 style="@style/EditText"
@@ -140,6 +170,7 @@
 
             <EditText
                 android:id="@+id/tvOrigin"
+                android:textColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text=""
@@ -149,6 +180,7 @@
 
             <EditText
                 android:id="@+id/tvDestiny"
+                android:textColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text=""
@@ -160,6 +192,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text=""
+                android:textColor="@color/white"
                 style="@style/EditText"
                 android:enabled="false"
                 />
@@ -167,12 +200,13 @@
 
             <EditText
                 android:id="@+id/editTextToll"
+                style="@style/EditText"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:digits="0123456789."
                 android:inputType="numberDecimal"
-                style="@style/EditText"
-                android:text=""/>
+                android:text=""
+                android:textColor="@color/white" />
 
             <EditText
                 android:id="@+id/editTextParking"
@@ -180,6 +214,7 @@
                 android:layout_height="40dp"
                 android:digits="0123456789."
                 android:inputType="numberDecimal"
+                android:textColor="@color/white"
                 style="@style/EditText"
                 android:text=""/>
 
@@ -189,6 +224,7 @@
                 android:layout_height="40dp"
                 android:digits="0123456789."
                 android:inputType="numberDecimal"
+                android:textColor="@color/white"
                 style="@style/EditText"
                 android:text=""/>
 
@@ -198,6 +234,7 @@
                 android:layout_height="40dp"
                 android:digits="0123456789."
                 android:inputType="numberDecimal"
+                android:textColor="@color/white"
                 style="@style/EditText"
                 android:text=""/>
 
@@ -205,6 +242,7 @@
                 android:id="@+id/tvTotalCost"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:textColor="@color/white"
                 android:text=""
                 style="@style/EditText"
                 android:visibility="invisible"
@@ -227,10 +265,10 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            tools:srcCompat="@drawable/logo" />
+            tools:background="@drawable/logo" />
 
         <TextView
             android:id="@+id/tvChoferNombre"
