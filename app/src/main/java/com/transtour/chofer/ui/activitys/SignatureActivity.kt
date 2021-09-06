@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.kyanogen.signatureview.SignatureView
 import com.transtour.chofer.R
@@ -13,6 +14,7 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
+import java.lang.Exception
 import java.util.*
 
 class SignatureActivity : AppCompatActivity() {
@@ -56,19 +58,25 @@ class SignatureActivity : AppCompatActivity() {
         var fileDirectory: File? = null
         var result = ""
 
+       // fileDirectory = File(getExternalFilesDir(Environment.DIRECTORY_DCIM) , image_DIRECTORY)
+
         if (android.os.Build.VERSION.SDK_INT >= 29) {
             fileDirectory = File(getExternalFilesDir(Environment.DIRECTORY_DCIM) , image_DIRECTORY)
         } else {
-            fileDirectory = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) , image_DIRECTORY)
-        }
+             fileDirectory = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) , image_DIRECTORY)
+         }
 
-        if (!fileDirectory.exists()){
-            fileDirectory.mkdirs()
+        if (!fileDirectory?.exists()!!){
+            fileDirectory?.mkdirs()
             Log.d("file directory: ", fileDirectory.toString())
         }
 
-        val file = File(fileDirectory, "${UUID.randomUUID()}.jpg")
         try {
+
+            val file = File(fileDirectory, "${UUID.randomUUID()}.jPEG")
+            if(file.canWrite()){
+                file.createNewFile()
+            }
             val stream: OutputStream = FileOutputStream(file)
 
             // Compress the bitmap
@@ -83,6 +91,7 @@ class SignatureActivity : AppCompatActivity() {
             result = file.absolutePath
         }catch (e:Exception) {
             Log.d("File Exception", "File not Created Exception")
+            Toast.makeText(applicationContext,e.localizedMessage.toString(),Toast.LENGTH_LONG).show()
         }
         return result
     }

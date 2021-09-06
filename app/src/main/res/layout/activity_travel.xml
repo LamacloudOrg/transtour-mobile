@@ -4,35 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F2F2F2"
     tools:context=".ui.activitys.TravelActivity">
 
     <LinearLayout
         android:id="@+id/llButons"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="100dp"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/llTravel"
         tools:layout_editor_absoluteX="16dp">
 
         <Button
-            android:id="@+id/btnStart"
+            android:id="@+id/btnRefreshTravel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="start" />
+            android:text="actualizar" />
 
         <Button
             android:id="@+id/btnFinish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="finish" />
+            android:text="firmar" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/llTravel"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/llChofer"
         tools:layout_editor_absoluteX="117dp">
@@ -43,60 +44,173 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <Button
-                android:id="@+id/btnRefreshTravel"
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="refresh" />
+                android:layout_height="40dp"
+                style="@style/EditText"
+                android:text="FECHA"
+            />
 
-            <ImageButton
-                android:id="@+id/btnCallUser"
+
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_media_play"
-                android:text="call" />
+                android:layout_height="40dp"
+                style="@style/EditText"
+                android:text="PASAJERO"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                style="@style/EditText"
+                android:text="ORIGEN" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                style="@style/EditText"
+                android:text="DESTINO" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                style="@style/EditText"
+                android:text="CONSIDERACIONES" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                style="@style/EditText"
+                android:text="PEAJE" />
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                style="@style/EditText"
+                android:text="COSTO ESTACIONAMIENTO" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                style="@style/EditText"
+                android:text="COSTO ESPERA" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                style="@style/EditText"
+                android:text="COSTO VUELTA" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                style="@style/EditText"
+                android:visibility="invisible"
+                android:text="COSTO TOTAL" />
+
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:id="@+id/travelData"
             android:orientation="vertical">
 
-            <TextView
+            <EditText
                 android:id="@+id/tvDate"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="12:30" />
+                android:layout_height="40dp"
+                android:text=""
+                style="@style/EditText"
+                android:enabled="false"/>
 
-            <TextView
+            <EditText
                 android:id="@+id/tvPassenger"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="43.213.213" />
+                android:layout_height="40dp"
+                style="@style/EditText"
+                android:text=""
+                android:enabled="false"/>
 
-            <TextView
+            <EditText
                 android:id="@+id/tvOrigin"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="11892021" />
+                android:layout_height="40dp"
+                android:text=""
+                style="@style/EditText"
+                android:enabled="false"
+                />
 
-            <TextView
+            <EditText
                 android:id="@+id/tvDestiny"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="12/04/2020" />
+                android:layout_height="40dp"
+                android:text=""
+                style="@style/EditText"
+                android:enabled="false"/>
 
-            <TextView
+            <EditText
                 android:id="@+id/tvObeservation"
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_weight="1"
-                android:text="Juan Manuel" />
+                android:layout_height="40dp"
+                android:text=""
+                style="@style/EditText"
+                android:enabled="false"
+                />
+
+
+            <EditText
+                android:id="@+id/editTextToll"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:digits="0123456789."
+                android:inputType="numberDecimal"
+                style="@style/EditText"
+                android:text=""/>
+
+            <EditText
+                android:id="@+id/editTextParking"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:digits="0123456789."
+                android:inputType="numberDecimal"
+                style="@style/EditText"
+                android:text=""/>
+
+            <EditText
+                android:id="@+id/editTextWaitingTime"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:digits="0123456789."
+                android:inputType="numberDecimal"
+                style="@style/EditText"
+                android:text=""/>
+
+            <EditText
+                android:id="@+id/editTextTaxForReturn"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:digits="0123456789."
+                android:inputType="numberDecimal"
+                style="@style/EditText"
+                android:text=""/>
+
+            <EditText
+                android:id="@+id/tvTotalCost"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text=""
+                style="@style/EditText"
+                android:visibility="invisible"
+                android:enabled="false"/>
+
+
         </LinearLayout>
 
     </LinearLayout>
@@ -104,23 +218,24 @@
     <LinearLayout
         android:id="@+id/llChofer"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="155dp"
-            android:layout_height="120dp"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
             android:layout_weight="1"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+            tools:srcCompat="@drawable/logo" />
 
         <TextView
             android:id="@+id/tvChoferNombre"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:text="TextView" />
     </LinearLayout>

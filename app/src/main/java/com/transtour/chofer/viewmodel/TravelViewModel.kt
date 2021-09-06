@@ -13,28 +13,58 @@ class TravelViewModel(): ViewModel()  {
     val TAG:String = "TravelViewModel"
 
 
+
      fun  getTravel(context: Context){
 
-        val sharedPref = context?.getSharedPreferences(
-            "transtour.mobile", Context.MODE_PRIVATE)
-         val travel = sharedPref?.getString("travel-new",null)
-
-        //TODO ver SQLLite Local
 
         Log.d("TravelViewModel","obteniendo travel")
 
-         travel.let {
-             it?.let { it1 -> Log.d("TravelViewModel", it1)
-                // val jsonObject: JsonObject = JsonParser().parse(it1).getAsJsonObject()
-                 val  gson = Gson()
-                 val travel = gson.fromJson(it1, Travel::class.java)
-                 Log.d("travel-desrializado",travel.toString())
-                 resultado.postValue(travel)
-             }
+         val sharedPref = context?.getSharedPreferences(
+             "transtour.mobile", Context.MODE_PRIVATE)
 
-         }
+         var travelDefault= Travel()
+         travelDefault.date=""
+         travelDefault.destiny=""
+         travelDefault.hour=""
+         travelDefault.origin=""
+         travelDefault.id=""
+         travelDefault.taxiDriver=""
+         travelDefault.passenger=""
+
+         val gson = com.google.gson.Gson()
+         val json = gson.toJson(travelDefault)
+
+
+         val travelString = sharedPref?.getString("travel-new",json.toString())
+         val travel = gson.fromJson(travelString, Travel::class.java)
+         Log.d("travel-desrializado",travel.toString())
+
+         resultado.postValue(travel)
+
+
 
      }
 
 
+    fun  removeTravel(context: Context){
+        val sharedPref = context?.getSharedPreferences(
+            "transtour.mobile", Context.MODE_PRIVATE)
+
+
+        with (sharedPref?.edit()){
+            val gson = com.google.gson.Gson()
+            var travelDefault= Travel()
+            travelDefault.date=""
+            travelDefault.destiny=""
+            travelDefault.hour=""
+            travelDefault.origin=""
+            travelDefault.id=""
+            travelDefault.taxiDriver=""
+            travelDefault.passenger=""
+            val json = gson.toJson(travelDefault)
+            //travelSet.add(json)
+            this?.putString("travel-new", json.toString())
+            this?.apply()
+        }
+    }
 }

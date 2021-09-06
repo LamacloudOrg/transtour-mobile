@@ -22,27 +22,7 @@ class TravelInfoService: JobService() {
     }
 
     private fun doBackgroundWork(params: JobParameters?) {
-        GlobalScope.launch {
-            try {
-
-                val response = TravelNetworkAdapter.apiClient.lastTravel(true)
-                if (response.isSuccessful){
-            //        Log.i(TAG,"last travel ${response.body()} ")
-                }else{
-              //      Log.d(TAG,"no se pudo recuperar el viaje  ${response.errorBody()} ")
-                    jobCancelled = true
-                }
-
-               // Log.i(TAG, "Job finished");
-                jobFinished(params, false);
-
-            }catch (e:Exception){
-                e.stackTrace
-               // Log.i(TAG,"error  ${e.localizedMessage} ")
-            }
-
-        }
-
+        println("job")
     }
 
     override fun onStopJob(params: JobParameters?): Boolean {

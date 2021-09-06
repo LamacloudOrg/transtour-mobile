@@ -94,12 +94,12 @@ class RegisterActivity() : AppCompatActivity() {
             "transtour.mobile", Context.MODE_PRIVATE
         )
 
-        val userId: String = editTextNameUser.text.toString()
+        val dni: String = editTextNameUser.text.toString()
         val password: String = editTextPassword.text.toString()
         val token: String = editTextToken.text.toString()
-        val user = UserRegisterNotification(userId.toLong(), sharedPref.getString("fcmToken", ""))
+        val user = UserRegisterNotification(dni.toLong(), sharedPref.getString("fcmToken", ""))
 
-        if (userId.isBlank()){
+        if (dni.isBlank()){
             editTextNameUser.setError("No se puede ser vacio",null)
             return
         }
