@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.activitys.RegisterActivity"
-    android:background="#F2F2F2">
+    android:background="#307DA5">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -24,6 +24,7 @@
     <EditText
         android:id="@+id/editextUserNameRegister"
         style="@style/EditText"
+        android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -42,6 +43,7 @@
     <EditText
         android:id="@+id/editTextPasswordToken"
         style="@style/EditText"
+        android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -60,6 +62,7 @@
     <EditText
         android:id="@+id/editTextPasswordRegister"
         style="@style/EditText"
+        android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -84,7 +87,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
-        android:background="@color/red_button"
+        android:background="#4984a3"
         android:onClick="registerAction"
         android:text="@string/register"
         app:layout_constraintEnd_toEndOf="parent"
