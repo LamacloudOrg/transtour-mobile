@@ -185,7 +185,7 @@ class TravelActivity() : AppCompatActivity() {
                 isOk ->
                 if (isOk){
                     clearAll()
-                    removeTravel()
+                    //removeTravel()
                     Toast.makeText(applicationContext,"La firma se impacto correctamente",Toast.LENGTH_LONG).show()
                 }else{
                     Toast.makeText(applicationContext,"No se pudo impactar intente nuevamente",Toast.LENGTH_LONG).show()

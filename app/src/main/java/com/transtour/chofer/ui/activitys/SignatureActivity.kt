@@ -42,9 +42,7 @@ class SignatureActivity : AppCompatActivity() {
 
         save.setOnClickListener { it ->
             bitmap=signatureView.signatureBitmap
-            resizeBitmap(bitmap,180,36)
-            path=saveImage(bitmap)
-
+            path=saveImage(resizeBitmap(bitmap,180,36))
             val intent:Intent = Intent()
             intent.apply {
                 putExtra("path",path)
@@ -102,7 +100,7 @@ class SignatureActivity : AppCompatActivity() {
             bitmap,
             width,
             height,
-            false
+            true
         )
     }
 }

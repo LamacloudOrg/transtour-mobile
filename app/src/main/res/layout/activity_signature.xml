@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#307DA5"
+    android:background="#F2F2F2"
     tools:context=".ui.activitys.SignatureActivity">
 
     <com.kyanogen.signatureview.SignatureView
@@ -13,40 +13,23 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        sign:backgroundColor="#307DA5"
+        sign:backgroundColor="#FFF"
         sign:enableSignature="true"
-        sign:penColor="@color/white"
+        sign:penColor="@color/black"
         sign:penSize="5dp" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <Button
+        android:id="@+id/signatureClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#4984a3"
+        android:text="Clear" />
 
-
-        <com.transtour.chofer.util.VerticalButton
-            android:id="@+id/signatureClear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:text="Clear"
-            android:background="#4984a3"
-            sign:layout_constraintStart_toEndOf="@+id/signatureSave"
-            sign:layout_constraintTop_toTopOf="parent" />
-
-        <com.transtour.chofer.util.VerticalButton
-            android:id="@+id/signatureSave"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:background="#4984a3"
-            android:text="Save"
-            sign:layout_constraintStart_toStartOf="parent"
-            sign:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/signatureSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#4984a3"
+        android:text="Save" />
 
 </LinearLayout>
