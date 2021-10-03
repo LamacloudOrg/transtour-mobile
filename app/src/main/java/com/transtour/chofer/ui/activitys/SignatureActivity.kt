@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.kyanogen.signatureview.SignatureView
 import com.transtour.chofer.R
+import com.transtour.chofer.util.BaseActivity
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -17,7 +18,7 @@ import java.io.OutputStream
 import java.lang.Exception
 import java.util.*
 
-class SignatureActivity : AppCompatActivity() {
+class SignatureActivity : BaseActivity() {
 
     private lateinit var bitmap: Bitmap
     private lateinit var clear: Button
