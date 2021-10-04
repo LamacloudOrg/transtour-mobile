@@ -6,12 +6,9 @@ import android.os.Bundle
 import android.os.Environment
 import android.util.Log
 import android.widget.Button
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.kyanogen.signatureview.SignatureView
 import com.transtour.chofer.R
 import com.transtour.chofer.util.BaseActivity
-import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
@@ -54,24 +51,27 @@ class SignatureActivity : BaseActivity() {
     }
 
     fun saveImage(bitmap: Bitmap?) :String {
-     // val bytes = ByteArrayOutputStream()
-        var fileDirectory: File? = null
         var result = ""
 
-       // fileDirectory = File(getExternalFilesDir(Environment.DIRECTORY_DCIM) , image_DIRECTORY)
+        try {
+     // val bytes = ByteArrayOutputStream()
+        var fileDirectory: File? = null
+
+        fileDirectory = File(getExternalFilesDir(Environment.DIRECTORY_DCIM) , image_DIRECTORY)
 
         if (android.os.Build.VERSION.SDK_INT >= 29) {
             fileDirectory = File(getExternalFilesDir(Environment.DIRECTORY_DCIM) , image_DIRECTORY)
+
         } else {
              fileDirectory = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) , image_DIRECTORY)
-         }
+
+        }
 
         if (!fileDirectory?.exists()!!){
             fileDirectory?.mkdirs()
             Log.d("file directory: ", fileDirectory.toString())
         }
 
-        try {
 
             val file = File(fileDirectory, "${UUID.randomUUID()}.jPEG")
             if(file.canWrite()){
@@ -90,8 +90,9 @@ class SignatureActivity : BaseActivity() {
             Log.d("File Created", "File Created")
             result = file.absolutePath
         }catch (e:Exception) {
-            Log.d("File Exception", "File not Created Exception")
-            Toast.makeText(applicationContext,e.localizedMessage.toString(),Toast.LENGTH_LONG).show()
+          //  Log.d("File Exception", "File not Created Exception")
+          //  Toast.makeText(applicationContext,e.localizedMessage.toString(),Toast.LENGTH_LONG).show()
+            throw Exception();
         }
         return result
     }
