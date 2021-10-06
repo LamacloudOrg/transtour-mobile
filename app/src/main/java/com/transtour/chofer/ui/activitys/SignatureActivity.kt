@@ -12,7 +12,6 @@ import com.transtour.chofer.util.BaseActivity
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
-import java.lang.Exception
 import java.util.*
 
 class SignatureActivity : BaseActivity() {
@@ -40,7 +39,7 @@ class SignatureActivity : BaseActivity() {
 
         save.setOnClickListener { it ->
             bitmap=signatureView.signatureBitmap
-            path=saveImage(resizeBitmap(bitmap,180,36))
+            path=saveImage(bitmap)
             val intent:Intent = Intent()
             intent.apply {
                 putExtra("path",path)
@@ -53,19 +52,10 @@ class SignatureActivity : BaseActivity() {
     fun saveImage(bitmap: Bitmap?) :String {
         var result = ""
 
-        try {
-     // val bytes = ByteArrayOutputStream()
-        var fileDirectory: File? = null
-
-        fileDirectory = File(getExternalFilesDir(Environment.DIRECTORY_DCIM) , image_DIRECTORY)
-
-        if (android.os.Build.VERSION.SDK_INT >= 29) {
-            fileDirectory = File(getExternalFilesDir(Environment.DIRECTORY_DCIM) , image_DIRECTORY)
-
-        } else {
-             fileDirectory = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) , image_DIRECTORY)
-
-        }
+            var fileDirectory = File(
+                applicationContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES),
+                ""
+            )
 
         if (!fileDirectory?.exists()!!){
             fileDirectory?.mkdirs()
@@ -89,11 +79,7 @@ class SignatureActivity : BaseActivity() {
             stream.close()
             Log.d("File Created", "File Created")
             result = file.absolutePath
-        }catch (e:Exception) {
-          //  Log.d("File Exception", "File not Created Exception")
-          //  Toast.makeText(applicationContext,e.localizedMessage.toString(),Toast.LENGTH_LONG).show()
-            throw Exception();
-        }
+
         return result
     }
 
