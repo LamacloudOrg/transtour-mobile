@@ -7,6 +7,6 @@ import retrofit2.http.*
 
 interface ApiClient {
     @Headers("Accept: application/json")
-    @POST("api/service-travel/v1/LoginError/insertError")
+    @POST("api/service-travel/v1/loginerror/insert")
     suspend fun insert(@Body loginError: LoginError): Response<ResponseBody>
 }

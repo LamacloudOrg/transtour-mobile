@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 class Travel{
 
+
+
      //@SerializedName("travel_id")
      var id:String? = null
      //@SerializedName("fecha")
@@ -18,6 +20,13 @@ class Travel{
      var origin:String? = null
      //@SerializedName("destiny")
      var destiny:String? = null
+     var observation: String ? = null
+     var company:String? = null
+     var netAmount:String? = null
+     var waitingTime:String? = null
+     var toll:String? = null
+     var parkingAmount:String? = null
+     var takForReturn:String? = null
 
 
      override fun toString(): String {

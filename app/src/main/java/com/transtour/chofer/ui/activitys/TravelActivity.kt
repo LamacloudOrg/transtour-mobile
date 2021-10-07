@@ -18,6 +18,7 @@ import com.transtour.chofer.R
 import com.transtour.chofer.model.Signature
 import com.transtour.chofer.model.Travel
 import com.transtour.chofer.model.TravelTaxes
+import com.transtour.chofer.util.BaseActivity
 import com.transtour.chofer.viewmodel.TravelViewModel
 import com.transtour.chofer.viewmodel.VoucherViewModel
 import kotlinx.coroutines.GlobalScope
@@ -26,7 +27,7 @@ import java.io.File
 import javax.inject.Inject
 
 
-class TravelActivity() : AppCompatActivity() {
+class TravelActivity() : BaseActivity() {
 
     val TAG: String = "TravelActivity"
     //@Inject
@@ -39,10 +40,13 @@ class TravelActivity() : AppCompatActivity() {
     lateinit var tvOrigin :EditText
     lateinit var tvDestiny:EditText
     lateinit var tvObservation:EditText
+    lateinit var tvtextMontoViaje:TextView
+    lateinit var tvtextCotoTotal:TextView
     lateinit var  etWaitingTime:EditText
     lateinit var  etToll:EditText
     lateinit var  etparkingAmount:EditText
     lateinit var editTextTaxForReturn:EditText
+    lateinit var editTextTaxAmount:EditText
     lateinit var  tvtotalCost:EditText
     lateinit var btnFinisih:Button
     lateinit var  btnRefreshTravel:Button
@@ -50,7 +54,7 @@ class TravelActivity() : AppCompatActivity() {
 
 
 
-    var totalCost:Double = 0.00
+    var totalNetAmount:Double = 0.00
     var passanger: String? = null
     var date: String? = null
     val SECOND_ACTIVITY_REQUEST_CODE:Int =1
@@ -74,10 +78,6 @@ class TravelActivity() : AppCompatActivity() {
         val token = sharedPref?.getString("token-user","")
 
         token?.let { Log.d("token-user", it) }
-
-
-        val textViewChofer:TextView = findViewById(R.id.tvChoferNombre)
-        textViewChofer.text ="nombre chofer"
 
         configView()
     }
@@ -108,16 +108,10 @@ class TravelActivity() : AppCompatActivity() {
         etToll =findViewById(R.id.editTextToll)
         etparkingAmount =findViewById(R.id.editTextParking)
         editTextTaxForReturn = findViewById(R.id.editTextTaxForReturn)
+        editTextTaxAmount = findViewById(R.id.editTextTaxAmount)
         tvtotalCost = findViewById(R.id.tvTotalCost)
-        btnLogout = findViewById(R.id.btnLogout)
-
-
-        btnLogout.setOnClickListener{
-            val intent = Intent(applicationContext,LoginActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
+        tvtextMontoViaje = findViewById(R.id.tvtextMontoViaje)
+        tvtextCotoTotal = findViewById(R.id.tvtextCotoTotal)
 
         btnFinisih.setOnClickListener{
 
@@ -152,6 +146,8 @@ class TravelActivity() : AppCompatActivity() {
             _,hasFocus -> if(!hasFocus){
             travelTaxes.waitingTime = etWaitingTime.text.toString()
             updateCost(etWaitingTime.text.toString())
+            }else{
+                resetCost(etWaitingTime.text.toString())
             }
         }
 
@@ -159,8 +155,11 @@ class TravelActivity() : AppCompatActivity() {
                 _,hasFocus -> if(!hasFocus){
                 travelTaxes.tolAmount = etToll.text.toString()
                 updateCost(etToll.text.toString())
+            }else{
+                resetCost(etToll.text.toString())
             }
         }
+
 
         etparkingAmount.setOnFocusChangeListener{
                 _,hasFocus -> if(!hasFocus){
@@ -171,8 +170,10 @@ class TravelActivity() : AppCompatActivity() {
 
         editTextTaxForReturn.setOnFocusChangeListener{
                 _,hasFocus -> if(!hasFocus){
-                travelTaxes.taxForReturn = editTextTaxForReturn.text.toString()
-                updateCost(editTextTaxForReturn.text.toString())
+                    travelTaxes.taxForReturn = editTextTaxForReturn.text.toString()
+                    updateCost(editTextTaxForReturn.text.toString())
+                }else{
+                    resetCost(editTextTaxForReturn.text.toString())
                 }
         }
 
@@ -185,7 +186,7 @@ class TravelActivity() : AppCompatActivity() {
                 isOk ->
                 if (isOk){
                     clearAll()
-                    //removeTravel()
+                    removeTravel()
                     Toast.makeText(applicationContext,"La firma se impacto correctamente",Toast.LENGTH_LONG).show()
                 }else{
                     Toast.makeText(applicationContext,"No se pudo impactar intente nuevamente",Toast.LENGTH_LONG).show()
@@ -216,6 +217,7 @@ class TravelActivity() : AppCompatActivity() {
 
     }
 
+
     private fun removeTravel() {
         travelViewModel.removeTravel(applicationContext)
     }
@@ -244,7 +246,14 @@ class TravelActivity() : AppCompatActivity() {
         etparkingAmount.setText("")
         editTextTaxForReturn.setText("")
         tvtotalCost.isEnabled = true
+        tvtotalCost.visibility = View.INVISIBLE
         tvtotalCost.setText("")
+        editTextTaxAmount.isEnabled = true
+        editTextTaxAmount.setText("")
+        editTextTaxAmount.isEnabled = false
+        editTextTaxAmount.visibility = View.INVISIBLE
+        tvtextCotoTotal.visibility = View.INVISIBLE
+        tvtextMontoViaje.visibility = View.INVISIBLE
     }
 
 
@@ -258,17 +267,56 @@ class TravelActivity() : AppCompatActivity() {
         tvPassenger.setText(travel.passenger)
         tvOrigin.setText(travel.origin)
         tvDestiny.setText( travel.destiny)
-        tvObservation.setText("No aplica")
+        tvObservation.setText(travel.observation)
         travelId = travel.id.toString()
         travelTaxes.id = travel.id.toString()
-
-        //TODO falta agregar el costo
-       //totalCost += 100.12
+        totalNetAmount = travel.netAmount?.toDouble()!!
+        tvtotalCost.setText(getTotalTravelAmount(travel))
+        editTextTaxAmount.setText(travel.netAmount)
+        etWaitingTime.setText(travel.waitingTime)
+        etToll.setText(travel.toll)
+        etparkingAmount.setText(travel.parkingAmount)
+        editTextTaxForReturn.setText(travel.takForReturn)
+        if (travel.company?.toLowerCase().equals("covans")) {
+        tvtotalCost.visibility = View.VISIBLE
+        editTextTaxAmount.visibility = View.VISIBLE
+        tvtextCotoTotal.visibility = View.VISIBLE
+        tvtextMontoViaje.visibility = View.VISIBLE
+        }else{
+        tvtotalCost.visibility = View.INVISIBLE
+        editTextTaxAmount.visibility = View.INVISIBLE
+        tvtextCotoTotal.visibility = View.VISIBLE
+        tvtextMontoViaje.visibility = View.VISIBLE
+       }
 
     }
 
+    private fun getTotalTravelAmount(travel: Travel): String {
+        var totalCost  = "0.00".toDouble()
+        if (!travel.netAmount?.isEmpty()!!) {
+            totalCost += travel.netAmount!!.toDouble()
+        }
+        if (!travel.toll?.isEmpty()!!) {
+            totalCost += travel.toll!!.toDouble()
+        }
 
-    fun convertToBase64(attachment: File): String {3
+        if (!travel.parkingAmount?.isEmpty()!!) {
+            totalCost += travel.parkingAmount!!.toDouble()
+        }
+
+        if (!travel.takForReturn?.isEmpty()!!) {
+            totalCost += travel.takForReturn!!.toDouble()
+        }
+
+        if (!travel.waitingTime?.isEmpty()!!) {
+            totalCost += travel.waitingTime!!.toDouble()
+        }
+
+        return  totalCost.toString()
+    }
+
+
+    fun convertToBase64(attachment: File): String {
         return Base64.encodeToString(attachment.readBytes(), Base64.NO_WRAP)
     }
 
@@ -299,13 +347,34 @@ class TravelActivity() : AppCompatActivity() {
 
     private fun updateCost(tax: String?) {
 
+        val totalCost = tvtotalCost.text.toString()
+        var totalCost_ = "0.00".toDouble()
+        if (!totalCost.isNullOrEmpty()){
+            totalCost_ += totalCost.toDouble()
+        }
+
         tax?.let {
             if (!tax.isEmpty()) {
-                totalCost += it.toDouble()
-                tvtotalCost.setText(totalCost.toString())
+                totalCost_ += it.toDouble()
+                tvtotalCost.setText(totalCost_.toString())
             }
         }
 
+
+    }
+
+
+
+    private fun resetCost(tax: String) {
+        val totalCost = tvtotalCost.text.toString()
+        var totalCost_ = "0.00".toDouble()
+        if (!totalCost.isNullOrEmpty()){
+            totalCost_ += totalCost.toDouble()
+        }
+        if ( !tax.isNullOrEmpty())    {
+            totalCost_ -= tax.toDouble()
+            tvtotalCost.setText(totalCost_.toString())
+        }
 
     }
 

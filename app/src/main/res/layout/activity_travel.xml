@@ -13,6 +13,10 @@
         android:layout_height="100dp"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/llTravel"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
         tools:layout_editor_absoluteX="16dp">
 
         <Button
@@ -34,31 +38,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/otherButtons"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/mainButtons"
-        tools:layout_editor_absoluteX="16dp">
-
-        <Button
-            android:id="@+id/btnRefresh"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#4984a3"
-            android:text="refresh" />
-
-        <Button
-            android:id="@+id/btnLogout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#4984a3"
-            android:text="logout" />
-    </LinearLayout>
-
-    <LinearLayout
         android:id="@+id/llTravel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -72,13 +51,6 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                style="@style/EditText"
-                android:text="FECHA"
-            />
-
 
             <TextView
                 android:layout_width="match_parent"
@@ -86,6 +58,12 @@
                 style="@style/EditText"
                 android:text="PASAJERO"
                 />
+
+            <TextView
+                style="@style/EditText"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="FECHA" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -132,8 +110,17 @@
                 style="@style/EditText"
                 android:text="COSTO VUELTA" />
 
+            <TextView
+                android:id="@+id/tvtextMontoViaje"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                style="@style/EditText"
+                android:visibility="invisible"
+                android:text="MONTO VIAJE" />
+
 
             <TextView
+                android:id="@+id/tvtextCotoTotal"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 style="@style/EditText"
@@ -239,6 +226,17 @@
                 android:text=""/>
 
             <EditText
+                android:id="@+id/editTextTaxAmount"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:digits="0123456789."
+                android:inputType="numberDecimal"
+                android:textColor="@color/white"
+                style="@style/EditText"
+                android:visibility="invisible"
+                android:text=""/>
+
+            <EditText
                 android:id="@+id/tvTotalCost"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -253,10 +251,10 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/llChofer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="80px"
+        android:layout_height="200px"
         android:orientation="horizontal"
 
         app:layout_constraintEnd_toEndOf="parent"
@@ -266,15 +264,8 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
             tools:background="@drawable/logo" />
 
-        <TextView
-            android:id="@+id/tvChoferNombre"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="TextView" />
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,7 +21,9 @@
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity android:name="com.transtour.chofer.ui.activitys.SignVoucherActivity" />
         <activity android:name="com.transtour.chofer.ui.activitys.TravelActivity" />
+        <activity android:name="com.transtour.chofer.ui.activitys.ErrorActivity"/>
         <activity android:name="com.transtour.chofer.ui.activitys.LoginActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
