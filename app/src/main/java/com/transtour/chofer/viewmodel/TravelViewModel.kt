@@ -22,14 +22,7 @@ class TravelViewModel(): ViewModel()  {
          val sharedPref = context?.getSharedPreferences(
              "transtour.mobile", Context.MODE_PRIVATE)
 
-         var travelDefault= Travel()
-         travelDefault.date=""
-         travelDefault.destiny=""
-         travelDefault.hour=""
-         travelDefault.origin=""
-         travelDefault.id=""
-         travelDefault.taxiDriver=""
-         travelDefault.passenger=""
+         val travelDefault = defaulTravel()
 
          val gson = com.google.gson.Gson()
          val json = gson.toJson(travelDefault)
@@ -45,6 +38,22 @@ class TravelViewModel(): ViewModel()  {
 
      }
 
+    private fun defaulTravel(): Travel {
+        var travelDefault = Travel()
+        travelDefault.date = ""
+        travelDefault.destiny = ""
+        travelDefault.hour = ""
+        travelDefault.origin = ""
+        travelDefault.id = ""
+        travelDefault.taxiDriver = ""
+        travelDefault.passenger = ""
+        travelDefault.netAmount = ""
+        travelDefault.waitingTime = ""
+        travelDefault.takForReturn = ""
+        travelDefault.parkingAmount = ""
+        return travelDefault
+    }
+
 
     fun  removeTravel(context: Context){
         val sharedPref = context?.getSharedPreferences(
@@ -53,15 +62,7 @@ class TravelViewModel(): ViewModel()  {
 
         with (sharedPref?.edit()){
             val gson = com.google.gson.Gson()
-            var travelDefault= Travel()
-            travelDefault.date=""
-            travelDefault.destiny=""
-            travelDefault.hour=""
-            travelDefault.origin=""
-            travelDefault.id=""
-            travelDefault.taxiDriver=""
-            travelDefault.passenger=""
-            val json = gson.toJson(travelDefault)
+            val json = gson.toJson(defaulTravel())
             //travelSet.add(json)
             this?.putString("travel-new", json.toString())
             this?.apply()

@@ -254,6 +254,7 @@ class TravelActivity() : BaseActivity() {
         editTextTaxAmount.visibility = View.INVISIBLE
         tvtextCotoTotal.visibility = View.INVISIBLE
         tvtextMontoViaje.visibility = View.INVISIBLE
+
     }
 
 
@@ -270,7 +271,11 @@ class TravelActivity() : BaseActivity() {
         tvObservation.setText(travel.observation)
         travelId = travel.id.toString()
         travelTaxes.id = travel.id.toString()
-        totalNetAmount = travel.netAmount?.toDouble()!!
+        if (!travel.netAmount.isNullOrEmpty()) {
+            totalNetAmount = travel.netAmount?.toDouble()!!
+        }else{
+            totalNetAmount +="0.00".toDouble()
+        }
         tvtotalCost.setText(getTotalTravelAmount(travel))
         editTextTaxAmount.setText(travel.netAmount)
         etWaitingTime.setText(travel.waitingTime)
@@ -293,22 +298,23 @@ class TravelActivity() : BaseActivity() {
 
     private fun getTotalTravelAmount(travel: Travel): String {
         var totalCost  = "0.00".toDouble()
-        if (!travel.netAmount?.isEmpty()!!) {
+
+        if (travel?.netAmount?.isNotEmpty() == true) {
             totalCost += travel.netAmount!!.toDouble()
         }
-        if (!travel.toll?.isEmpty()!!) {
+        if (travel?.toll?.isNotEmpty() == true) {
             totalCost += travel.toll!!.toDouble()
         }
 
-        if (!travel.parkingAmount?.isEmpty()!!) {
+        if (travel?.parkingAmount?.isNotEmpty() == true) {
             totalCost += travel.parkingAmount!!.toDouble()
         }
 
-        if (!travel.takForReturn?.isEmpty()!!) {
+        if (travel?.takForReturn?.isEmpty() == true) {
             totalCost += travel.takForReturn!!.toDouble()
         }
 
-        if (!travel.waitingTime?.isEmpty()!!) {
+        if (travel?.waitingTime?.isEmpty() == true) {
             totalCost += travel.waitingTime!!.toDouble()
         }
 
