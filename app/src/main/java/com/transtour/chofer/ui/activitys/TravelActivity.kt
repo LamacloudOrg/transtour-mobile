@@ -282,6 +282,11 @@ class TravelActivity() : BaseActivity() {
         etToll.setText(travel.toll)
         etparkingAmount.setText(travel.parkingAmount)
         editTextTaxForReturn.setText(travel.takForReturn)
+        travelTaxes.taxForReturn = travel.takForReturn
+        travelTaxes.parkingAmount = travel.parkingAmount
+        travelTaxes.tolAmount = travel.toll
+        travelTaxes.waitingTime = travel.waitingTime
+
         if (travel.company?.toLowerCase().equals("covans")) {
         tvtotalCost.visibility = View.VISIBLE
         editTextTaxAmount.visibility = View.VISIBLE
