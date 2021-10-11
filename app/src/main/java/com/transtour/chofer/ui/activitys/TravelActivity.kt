@@ -315,11 +315,11 @@ class TravelActivity() : BaseActivity() {
             totalCost += travel.parkingAmount!!.toDouble()
         }
 
-        if (travel?.takForReturn?.isEmpty() == true) {
+        if (travel?.takForReturn?.isNotEmpty() == true) {
             totalCost += travel.takForReturn!!.toDouble()
         }
 
-        if (travel?.waitingTime?.isEmpty() == true) {
+        if (travel?.waitingTime?.isNotEmpty() == true) {
             totalCost += travel.waitingTime!!.toDouble()
         }
 
