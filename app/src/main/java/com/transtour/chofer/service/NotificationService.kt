@@ -52,6 +52,19 @@ class NotificationService: FirebaseMessagingService() {
 
         remoteMessage?.data.let {
 
+
+            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+            val notification = android.app.Notification.Builder(applicationContext)
+                .setContentTitle("Nuevo Viaje")
+                .setSmallIcon(R.drawable.ic_dialog_alert)
+                .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.ic_dialog_alert))
+                .build()
+
+            notificationManager.notify(1234,notification)
+
+            sendNotification("Nuevo Viaje");
+
             val sharedPref = applicationContext?.getSharedPreferences(
                 "transtour.mobile", Context.MODE_PRIVATE)
 
