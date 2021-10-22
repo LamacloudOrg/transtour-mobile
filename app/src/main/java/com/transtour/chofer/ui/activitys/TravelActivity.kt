@@ -287,7 +287,7 @@ class TravelActivity() : BaseActivity() {
         travelTaxes.tolAmount = travel.toll
         travelTaxes.waitingTime = travel.waitingTime
 
-        if (travel.company?.toLowerCase().equals("covans")) {
+        if (travel.company?.toLowerCase().equals("covance")) {
         tvtotalCost.visibility = View.VISIBLE
         editTextTaxAmount.visibility = View.VISIBLE
         tvtextCotoTotal.visibility = View.VISIBLE
