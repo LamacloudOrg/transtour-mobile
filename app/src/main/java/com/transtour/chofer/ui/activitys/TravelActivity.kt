@@ -41,6 +41,7 @@ class TravelActivity() : BaseActivity() {
     lateinit var tvDestiny:EditText
     lateinit var tvObservation:EditText
     lateinit var tvtextMontoViaje:TextView
+    lateinit var tvCompany:TextView
     lateinit var tvtextCotoTotal:TextView
     lateinit var  etWaitingTime:EditText
     lateinit var  etToll:EditText
@@ -112,6 +113,7 @@ class TravelActivity() : BaseActivity() {
         tvtotalCost = findViewById(R.id.tvTotalCost)
         tvtextMontoViaje = findViewById(R.id.tvtextMontoViaje)
         tvtextCotoTotal = findViewById(R.id.tvtextCotoTotal)
+        tvCompany = findViewById(R.id.tvCompany)
 
         btnFinisih.setOnClickListener{
 
@@ -286,8 +288,9 @@ class TravelActivity() : BaseActivity() {
         travelTaxes.parkingAmount = travel.parkingAmount
         travelTaxes.tolAmount = travel.toll
         travelTaxes.waitingTime = travel.waitingTime
+        tvCompany.text = travel.company
 
-        if (travel.company?.toLowerCase().equals("covance")) {
+        if (showTotal(travel.company?.toLowerCase())){
         tvtotalCost.visibility = View.VISIBLE
         editTextTaxAmount.visibility = View.VISIBLE
         tvtextCotoTotal.visibility = View.VISIBLE
@@ -295,9 +298,18 @@ class TravelActivity() : BaseActivity() {
         }else{
         tvtotalCost.visibility = View.INVISIBLE
         editTextTaxAmount.visibility = View.INVISIBLE
-        tvtextCotoTotal.visibility = View.VISIBLE
-        tvtextMontoViaje.visibility = View.VISIBLE
+        tvtextCotoTotal.visibility = View.INVISIBLE
+        tvtextMontoViaje.visibility = View.INVISIBLE
        }
+
+    }
+
+    private fun showTotal(company: String?): Boolean {
+        if (company == null) return false;
+        if (company?.equals("covance")) return  true;
+        if (company?.equals("particular")) return  true;
+
+        return false;
 
     }
 

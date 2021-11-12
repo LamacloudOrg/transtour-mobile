@@ -25,6 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#4984a3"
+            android:layout_marginTop="50dp"
             android:text="actualizar" />
 
         <Button
@@ -33,6 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#4984a3"
+            android:layout_marginTop="50dp"
             android:text="firmar" />
 
     </LinearLayout>
@@ -42,13 +44,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/llChofer"
-        tools:layout_editor_absoluteX="117dp">
+        tools:layout_editor_absoluteX="117dp"
+        tools:ignore="MissingConstraints">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:padding="10dp"
             android:orientation="vertical">
 
 
@@ -56,39 +59,78 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 style="@style/EditText"
+                android:scrollHorizontally="false"
+                android:textAlignment="center"
+                android:padding="2dp"
+                android:text="FECHA"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                style="@style/EditText"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:scrollHorizontally="false"
+                android:padding="2dp"
+                android:textAlignment="center"
                 android:text="PASAJERO"
-                />
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal" />
 
             <TextView
                 style="@style/EditText"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:text="FECHA" />
+                android:scrollHorizontally="false"
+                android:padding="2dp"
+                android:textAlignment="center"
+                android:text="COMPAÑIA"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                style="@style/EditText"
+                android:scrollHorizontally="false"
+                android:padding="2dp"
+                android:textAlignment="center"
+                android:text="ORIGEN"
+                android:gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                style="@style/EditText"
+                android:scrollHorizontally="false"
+                android:padding="2dp"
+                android:textAlignment="center"
+                android:text="DESTINO"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 style="@style/EditText"
-                android:text="ORIGEN" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                style="@style/EditText"
-                android:text="DESTINO" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                style="@style/EditText"
-                android:text="CONSIDERACIONES" />
+                android:scrollHorizontally="false"
+                android:padding="2dp"
+                android:textAlignment="center"
+                android:text="CONSIDERACIONES"
+                android:gravity="center_horizontal" />
 
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 style="@style/EditText"
-                android:text="PEAJE" />
+                android:scrollHorizontally="false"
+                android:padding="2dp"
+                android:textAlignment="center"
+                android:text="PEAJE"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal" />
 
 
 
@@ -96,27 +138,46 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 style="@style/EditText"
-                android:text="COSTO ESTACIONAMIENTO" />
+                android:scrollHorizontally="false"
+                android:padding="2dp"
+                android:textAlignment="center"
+                android:text="COSTO ESTACIONAMIENTO"
+                android:gravity="center_horizontal" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 style="@style/EditText"
-                android:text="COSTO ESPERA" />
+                android:scrollHorizontally="false"
+                android:padding="2dp"
+                android:textAlignment="center"
+                android:text="COSTO ESPERA"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 style="@style/EditText"
-                android:text="COSTO VUELTA" />
+                android:scrollHorizontally="false"
+                android:padding="2dp"
+                android:textAlignment="center"
+                android:text="COSTO VUELTA"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal" />
 
             <TextView
                 android:id="@+id/tvtextMontoViaje"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 style="@style/EditText"
+                android:scrollHorizontally="false"
                 android:visibility="invisible"
-                android:text="MONTO VIAJE" />
+                android:padding="2dp"
+                android:textAlignment="center"
+                android:text="MONTO VIAJE"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal" />
 
 
             <TextView
@@ -124,8 +185,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 style="@style/EditText"
+                android:scrollHorizontally="false"
                 android:visibility="invisible"
-                android:text="COSTO TOTAL" />
+                android:padding="2dp"
+                android:textAlignment="center"
+                android:text="COSTO TOTAL"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal" />
 
 
         </LinearLayout>
@@ -135,6 +201,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/travelData"
+            android:padding="10dp"
             android:orientation="vertical">
 
             <EditText
@@ -144,7 +211,14 @@
                 android:layout_height="40dp"
                 android:enabled="false"
                 android:text=""
-                android:textColor="@color/white" />
+                android:textAlignment="center"
+                android:textSize="17dp"
+                android:padding="2dp"
+
+                android:scrollHorizontally="false"
+                android:textColor="@color/white"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal" />
 
             <EditText
                 android:id="@+id/tvPassenger"
@@ -153,15 +227,40 @@
                 android:layout_height="40dp"
                 style="@style/EditText"
                 android:text=""
-                android:enabled="false"/>
+                android:textSize="17dp"
+                android:textAlignment="center"
+                android:padding="2dp"
+                android:scrollHorizontally="false"
+                android:enabled="false"
+                android:gravity="center_horizontal" />
+
+            <EditText
+                android:id="@+id/tvCompany"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                style="@style/EditText"
+                android:text=""
+                android:textSize="17dp"
+                android:textAlignment="center"
+                android:padding="2dp"
+                android:scrollHorizontally="false"
+                android:enabled="false"
+                android:gravity="center_horizontal" />
+
 
             <EditText
                 android:id="@+id/tvOrigin"
                 android:textColor="@color/white"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="65dp"
+                android:inputType="textMultiLine"
+                android:padding="2dp"
                 android:text=""
+                android:textSize="17dp"
+                android:textAlignment="center"
                 style="@style/EditText"
+                android:scrollHorizontally="false"
                 android:enabled="false"
                 />
 
@@ -169,20 +268,29 @@
                 android:id="@+id/tvDestiny"
                 android:textColor="@color/white"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="65dp"
+                android:inputType="textMultiLine"
                 android:text=""
+                android:textSize="17dp"
+                android:textAlignment="center"
+                android:padding="2dp"
                 style="@style/EditText"
-                android:enabled="false"/>
+                android:enabled="false"
+                android:gravity="center_horizontal" />
 
             <EditText
                 android:id="@+id/tvObeservation"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text=""
+                android:padding="2dp"
+                android:textSize="17dp"
+                android:textAlignment="center"
                 android:textColor="@color/white"
                 style="@style/EditText"
+                android:scrollHorizontally="false"
                 android:enabled="false"
-                />
+                android:gravity="center_horizontal" />
 
 
             <EditText
@@ -193,7 +301,12 @@
                 android:digits="0123456789."
                 android:inputType="numberDecimal"
                 android:text=""
-                android:textColor="@color/white" />
+                android:textAlignment="center"
+                android:textSize="17dp"
+                android:padding="2dp"
+                android:scrollHorizontally="false"
+                android:textColor="@color/white"
+                android:gravity="center_horizontal" />
 
             <EditText
                 android:id="@+id/editTextParking"
@@ -202,8 +315,13 @@
                 android:digits="0123456789."
                 android:inputType="numberDecimal"
                 android:textColor="@color/white"
+                android:padding="2dp"
+                android:textAlignment="center"
+                android:textSize="17dp"
                 style="@style/EditText"
-                android:text=""/>
+                android:scrollHorizontally="false"
+                android:text=""
+                android:gravity="center_horizontal" />
 
             <EditText
                 android:id="@+id/editTextWaitingTime"
@@ -212,8 +330,13 @@
                 android:digits="0123456789."
                 android:inputType="numberDecimal"
                 android:textColor="@color/white"
+                android:textAlignment="center"
+                android:scrollHorizontally="false"
+                android:padding="2dp"
+                android:textSize="17dp"
                 style="@style/EditText"
-                android:text=""/>
+                android:text=""
+                android:gravity="center_horizontal" />
 
             <EditText
                 android:id="@+id/editTextTaxForReturn"
@@ -223,7 +346,11 @@
                 android:inputType="numberDecimal"
                 android:textColor="@color/white"
                 style="@style/EditText"
-                android:text=""/>
+                android:padding="2dp"
+                android:textSize="17dp"
+                android:textAlignment="center"
+                android:text=""
+                android:gravity="center_horizontal" />
 
             <EditText
                 android:id="@+id/editTextTaxAmount"
@@ -233,40 +360,35 @@
                 android:inputType="numberDecimal"
                 android:textColor="@color/white"
                 style="@style/EditText"
+                android:scrollHorizontally="false"
                 android:visibility="invisible"
-                android:text=""/>
+                android:textAlignment="center"
+                android:padding="2dp"
+                android:text=""
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal" />
 
             <EditText
                 android:id="@+id/tvTotalCost"
+                style="@style/EditText"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:textColor="@color/white"
+                android:enabled="false"
+                android:padding="2dp"
+                android:scrollHorizontally="false"
                 android:text=""
-                style="@style/EditText"
+                android:textColor="@color/white"
+                android:textSize="17dp"
+                android:textAlignment="center"
                 android:visibility="invisible"
-                android:enabled="false"/>
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal" />
 
 
         </LinearLayout>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/llChofer"
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:orientation="horizontal"
 
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:background="@drawable/logo" />
-
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

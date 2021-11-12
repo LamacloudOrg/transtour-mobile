@@ -18,18 +18,26 @@
         sign:penColor="@color/black"
         sign:penSize="5dp" />
 
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
     <Button
         android:id="@+id/signatureClear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#4984a3"
-        android:text="Clear" />
+        android:layout_alignParentLeft="true"
+        android:text="borrar" />
 
     <Button
         android:id="@+id/signatureSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#4984a3"
-        android:text="Save" />
+        android:layout_alignParentRight="true"
+        android:text="aceptar" />
+    </RelativeLayout>
 
 </LinearLayout>
