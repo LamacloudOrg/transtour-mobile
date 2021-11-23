@@ -18,9 +18,15 @@ object LoginErrorNetworkAdapter {
 
                 val allHostsValid = HostnameVerifier { _, _ -> true }
 
+                val sharedPref = context?.getSharedPreferences(
+                        "transtour.mobile", Context.MODE_PRIVATE)
+
+                var tokenAutorization: String? = sharedPref?.getString("token","");
+
+
                 val httpClient = OkHttpClient.Builder()
                         .apply {
-                                addNetworkInterceptor(CustomInterceptor())
+                                addNetworkInterceptor(CustomInterceptor(tokenAutorization))
                                 sslSocketFactory(Ssl.generateCetificate(context)?.socketFactory)
                                 hostnameVerifier(allHostsValid)
 
