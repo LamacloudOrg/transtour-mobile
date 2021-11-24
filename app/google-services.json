@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "247178279519",
+    "project_id": "transtourchofer",
+    "storage_bucket": "transtourchofer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:247178279519:android:a77f8bcce02fc119a479ea",
+        "android_client_info": {
+          "package_name": "com.transtour.chofer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "247178279519-9vmqromelonpuoh8cp304rilgd2ft9i1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfkBKZRK0ZM8s0yusSs_a4dSlRIwglWng"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "247178279519-9vmqromelonpuoh8cp304rilgd2ft9i1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

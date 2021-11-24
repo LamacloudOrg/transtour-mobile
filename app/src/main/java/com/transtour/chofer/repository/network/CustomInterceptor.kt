@@ -10,15 +10,15 @@ class CustomInterceptor(val tokenAuthorization:String?) : Interceptor {
 
 
         val request: Request = chain.request()
-        Log.i("Request", request.toString())
+        Log.d("Request", request.toString())
 
-        Log.i("Body", request.body().toString())
-        Log.i("Body", request.body()?.contentType().toString())
+        Log.d("Body", request.body().toString())
+        Log.d("Body", request.body()?.contentType().toString())
 
-        if (!request.url().equals("https://209.126.85.7:8080/api/service-user/v1/user/oauth/token")){
-            return chain.proceed(chain.request().newBuilder().addHeader("Authorization","Bearer "+tokenAuthorization).build())
-        }else return chain.proceed(chain.request())
-    }
+        if (!tokenAuthorization.equals("")){
+            return chain.proceed(request.newBuilder().addHeader("Authorization","Bearer "+tokenAuthorization).build())
+        }else return chain.proceed(request)
+   }
 }
 
 

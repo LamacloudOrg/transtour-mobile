@@ -18,6 +18,9 @@ class LoginViewModel() :ViewModel()  {
             try {
 
                 val response = UserNetworkAdapter.generateService(context).login(user)
+
+                Log.d("response code", response.code().toString());
+
                 if (response.isSuccessful) {
                     resultado.postValue(true)
                     //TODO save in

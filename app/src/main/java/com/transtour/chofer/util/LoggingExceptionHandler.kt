@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.transtour.chofer.model.LoginError
 import com.transtour.chofer.repository.network.LoginError.LoginErrorNetworkAdapter
 import com.transtour.chofer.ui.activitys.ErrorActivity
-import com.transtour.chofer.ui.activitys.RegisterActivity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.transtour.chofer">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -19,25 +19,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name="com.transtour.chofer.ui.activitys.SignVoucherActivity" />
-        <activity android:name="com.transtour.chofer.ui.activitys.TravelActivity" />
-        <activity android:name="com.transtour.chofer.ui.activitys.ErrorActivity"/>
-        <activity android:name="com.transtour.chofer.ui.activitys.LoginActivity">
-
+        <activity android:name=".ui.activitys.ConfigurationActivity"/>
+        <activity android:name=".ui.activitys.TravelActivity" />
+        <activity android:name=".ui.activitys.ErrorActivity" />
+        <activity android:name=".ui.activitys.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.transtour.chofer.ui.activitys.RegisterActivity" />
-        <activity android:name="com.transtour.chofer.ui.activitys.SignatureActivity" />
+        <activity android:name=".ui.activitys.SignatureActivity" />
 
         <service
             android:name=".service.TravelInfoService"
-            android:permission="android.permission.BIND_JOB_SERVICE"
-            android:exported="true"/>
-
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
         <service
             android:name=".service.NotificationService"
             android:exported="false">
@@ -45,8 +42,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
-
     </application>
 
 </manifest>
