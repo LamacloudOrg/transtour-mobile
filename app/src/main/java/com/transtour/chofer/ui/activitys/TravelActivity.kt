@@ -7,10 +7,7 @@ import android.os.Bundle
 import android.util.Base64
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -42,7 +39,7 @@ class TravelActivity() : BaseActivity() {
     lateinit var tvObservation:EditText
     lateinit var tvtextMontoViaje:TextView
     lateinit var tvCompany:TextView
-    lateinit var tvtextCotoTotal:TextView
+    lateinit var tvTotalCost:TextView
     lateinit var  etWaitingTime:EditText
     lateinit var  etToll:EditText
     lateinit var  etparkingAmount:EditText
@@ -61,6 +58,9 @@ class TravelActivity() : BaseActivity() {
     val SECOND_ACTIVITY_REQUEST_CODE:Int =1
     var travelId:String = ""
     var travelTaxes:TravelTaxes = TravelTaxes("","","","","")
+    var waitingHours:String = "00"
+    var waitingMinutes:String = "00"
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,8 +79,60 @@ class TravelActivity() : BaseActivity() {
         val token = sharedPref?.getString("token-user","")
 
         token?.let { Log.d("token-user", it) }
-
+        loadDataSpinners()
         configView()
+    }
+
+    private fun loadDataSpinners() {
+        val spinner_1: Spinner = findViewById(R.id.spHours)
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.hours_array,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            spinner_1.adapter = adapter
+        }
+
+        val spinner_2: Spinner = findViewById(R.id.spMinutes)
+
+
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.minutes_array,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            spinner_2.adapter = adapter
+        }
+
+        spinner_1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                val selectedItem = parent.getItemAtPosition(position).toString()
+                waitingHours = selectedItem
+            } // to close the onItemSelected
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+
+            }
+        }
+
+        spinner_2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                val selectedItem = parent.getItemAtPosition(position).toString()
+                waitingMinutes = selectedItem
+            } // to close the onItemSelected
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+
+            }
+        }
+
     }
 
     override fun onResume() {
@@ -112,7 +164,7 @@ class TravelActivity() : BaseActivity() {
         editTextTaxAmount = findViewById(R.id.editTextTaxAmount)
         tvtotalCost = findViewById(R.id.tvTotalCost)
         tvtextMontoViaje = findViewById(R.id.tvtextMontoViaje)
-        tvtextCotoTotal = findViewById(R.id.tvtextCotoTotal)
+        tvTotalCost = findViewById(R.id.tvTotalCost)
         tvCompany = findViewById(R.id.tvCompany)
 
         btnFinisih.setOnClickListener{
@@ -139,6 +191,7 @@ class TravelActivity() : BaseActivity() {
 
 
             GlobalScope.launch {
+                travelTaxes.waitingTime = waitingHours+":"+waitingMinutes+"-"+ travelTaxes.waitingTime
                 Log.d("Travel taxex",travelTaxes.toString());
                 voucherViewModel.updateTaxes(travelTaxes,applicationContext)
             }
@@ -254,7 +307,7 @@ class TravelActivity() : BaseActivity() {
         editTextTaxAmount.setText("")
         editTextTaxAmount.isEnabled = false
         editTextTaxAmount.visibility = View.INVISIBLE
-        tvtextCotoTotal.visibility = View.INVISIBLE
+        tvTotalCost.visibility = View.INVISIBLE
         tvtextMontoViaje.visibility = View.INVISIBLE
 
     }
@@ -293,12 +346,12 @@ class TravelActivity() : BaseActivity() {
         if (showTotal(travel.company?.toLowerCase())){
         tvtotalCost.visibility = View.VISIBLE
         editTextTaxAmount.visibility = View.VISIBLE
-        tvtextCotoTotal.visibility = View.VISIBLE
+        tvTotalCost.visibility = View.VISIBLE
         tvtextMontoViaje.visibility = View.VISIBLE
         }else{
         tvtotalCost.visibility = View.INVISIBLE
         editTextTaxAmount.visibility = View.INVISIBLE
-        tvtextCotoTotal.visibility = View.INVISIBLE
+        tvTotalCost.visibility = View.INVISIBLE
         tvtextMontoViaje.visibility = View.INVISIBLE
        }
 

@@ -12,10 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/llTravel"
-
         app:layout_constraintBottom_toBottomOf="parent"
-
+        android:layout_marginBottom="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         tools:layout_editor_absoluteX="16dp">
 
@@ -143,6 +141,17 @@
                 android:textAlignment="center"
                 android:text="COSTO ESTACIONAMIENTO"
                 android:gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                style="@style/EditText"
+                android:scrollHorizontally="false"
+                android:padding="2dp"
+                android:textAlignment="center"
+                android:text="HORAS"
+                android:gravity="center_horizontal" />
+
 
             <TextView
                 android:layout_width="match_parent"
@@ -308,6 +317,8 @@
                 android:textColor="@color/white"
                 android:gravity="center_horizontal" />
 
+
+
             <EditText
                 android:id="@+id/editTextParking"
                 android:layout_width="match_parent"
@@ -322,6 +333,29 @@
                 android:scrollHorizontally="false"
                 android:text=""
                 android:gravity="center_horizontal" />
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <Spinner
+                    android:id="@+id/spHours"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/btn_dropdown"
+                    android:spinnerMode="dropdown"/>
+
+                <Spinner
+                    android:id="@+id/spMinutes"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/btn_dropdown"
+                    android:spinnerMode="dropdown" />
+
+
+            </LinearLayout>
+
 
             <EditText
                 android:id="@+id/editTextWaitingTime"

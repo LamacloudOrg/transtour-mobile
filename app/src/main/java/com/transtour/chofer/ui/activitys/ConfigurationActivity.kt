@@ -69,7 +69,16 @@ class ConfigurationActivity : AppCompatActivity() {
 
         val observer = Observer<Boolean> { isOK ->
             if (isOK) {
-                Toast.makeText(this, "Usuario ok", Toast.LENGTH_LONG).show()
+                //Toast.makeText(this, "Us", Toast.LENGTH_LONG).show()
+
+                sharedPref = applicationContext?.getSharedPreferences(
+                    "transtour.mobile", Context.MODE_PRIVATE)
+
+                with(sharedPref?.edit()){
+                    this?.putBoolean("termAndConditions",true);
+                    this?.apply()
+                }
+
                 val intent = Intent(this@ConfigurationActivity, TravelActivity::class.java).apply {
                     putExtra("userName", "kike")
                 }
