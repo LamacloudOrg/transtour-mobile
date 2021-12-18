@@ -2,10 +2,10 @@ package com.transtour.chofer.model
 
 import com.google.gson.annotations.SerializedName
 
-class TravelTaxes constructor(id:String?,waitingTime:String?,parkingAmount:String?,tolAmount:String?,taxForReturn:String?){
+class TravelTaxes constructor(id:Long?,waitingTime:String?,parkingAmount:String?,tolAmount:String?,taxForReturn:String?){
 
     @SerializedName("orderNumber")
-    var id:String? = null
+    var id:Long? = null
     @SerializedName("whitingTime")
     var waitingTime:String? = null
     @SerializedName("parkingAmount")

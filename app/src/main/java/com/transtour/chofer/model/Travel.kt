@@ -7,7 +7,7 @@ class Travel{
 
 
      //@SerializedName("travel_id")
-     var id:String? = null
+     var id:Long? = null
      //@SerializedName("fecha")
      var date:String? = null
      @SerializedName("time")

@@ -57,7 +57,7 @@ class TravelActivity() : BaseActivity() {
     var date: String? = null
     val SECOND_ACTIVITY_REQUEST_CODE:Int =1
     var travelId:String = ""
-    var travelTaxes:TravelTaxes = TravelTaxes("","","","","")
+    var travelTaxes:TravelTaxes = TravelTaxes(0L,"","","","")
     var waitingHours:String = "00"
     var waitingMinutes:String = "00"
 
@@ -325,7 +325,7 @@ class TravelActivity() : BaseActivity() {
         tvDestiny.setText( travel.destiny)
         tvObservation.setText(travel.observation)
         travelId = travel.id.toString()
-        travelTaxes.id = travel.id.toString()
+        travelTaxes.id =  travel.id
         if (!travel.netAmount.isNullOrEmpty()) {
             totalNetAmount = travel.netAmount?.toDouble()!!
         }else{

@@ -44,7 +44,7 @@ class TravelViewModel(): ViewModel()  {
         travelDefault.destiny = ""
         travelDefault.hour = ""
         travelDefault.origin = ""
-        travelDefault.id = ""
+        travelDefault.id = 0L
         travelDefault.taxiDriver = ""
         travelDefault.passenger = ""
         travelDefault.netAmount = ""
